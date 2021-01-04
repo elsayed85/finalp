@@ -345,7 +345,7 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="{{ route('patient.home') }}">
+                                    <a href="{{ route('admin.home') }}">
                                         <i class="si si-wrench"></i>
                                         Admin Dashboard
                                     </a>
