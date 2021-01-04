@@ -9,6 +9,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
+
+// [USER] Model is [Patient]
+
 class User extends Authenticatable implements HasMedia
 {
     use Notifiable, HasApiTokens, HasMediaTrait;

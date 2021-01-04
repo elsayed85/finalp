@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\AdminAuth;
 
 use App\Admin;
-use Validator;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
+    public $redirectTo = RouteServiceProvider::AdminHOME;
 
     /**
      * Create a new controller instance.

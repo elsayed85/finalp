@@ -18,13 +18,17 @@ Route::view('/', 'admin.landing');
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('admin.dashboard');
 });
+
 Route::view('/pages/slick', 'admin.pages.slick');
 Route::view('/pages/datatables', 'admin.pages.datatables');
 Route::view('/pages/blank', 'admin.pages.blank');
 
+// patient
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get("logout" , function(){
+    auth()->logout();
+});
 
 Route::group(['prefix' => 'admin' , 'as' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');

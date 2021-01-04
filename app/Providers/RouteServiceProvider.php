@@ -24,7 +24,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+
     public const HOME = '/home';
+    public const PatientHOME = '/patient/home';
+    public const AdminHOME = '/admin/home';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -49,6 +52,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPatientRoutes();
+
         $this->mapAdminRoutes();
 
         //
@@ -67,11 +72,25 @@ class RouteServiceProvider extends ServiceProvider
             'middleware' => ['web', 'admin', 'auth:admin'],
             'prefix' => 'admin',
             'as' => 'admin.',
-            'namespace' => $this->namespace,
+            'namespace' => $this->namespace . "\Admin",
         ], function ($router) {
             require base_path('routes/admin.php');
         });
     }
+
+
+    protected function mapPatientRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'auth'],
+            'prefix' => 'patient',
+            'as' => 'patient.',
+            'namespace' => $this->namespace . "\Patient",
+        ], function ($router) {
+            require base_path('routes/patient.php');
+        });
+    }
+
 
     /**
      * Define the "web" routes for the application.
