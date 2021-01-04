@@ -45,7 +45,7 @@
                     <!-- Sign In Form -->
                     <div class="row justify-content-center px-5">
                         <div class="col-sm-8 col-md-6 col-xl-4">
-                            <form class="js-validation-signin" method="POST" action="{{ url('/admin/login') }}">
+                            <form class="js-validation-signin" method="POST" action="{{ localUrl(route('admin.login')) }}">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-12">

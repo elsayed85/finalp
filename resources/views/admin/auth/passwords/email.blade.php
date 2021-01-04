@@ -55,7 +55,7 @@
                     <div class="row justify-content-center px-5">
                         <div class="col-sm-8 col-md-6 col-xl-4">
                             <form class="js-validation-reminder" method="POST"
-                                action="{{ url('/admin/password/email') }}" novalidate="novalidate">
+                                action="{{ localUrl(route('admin.password.request')) }}" novalidate="novalidate">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-12">

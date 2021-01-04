@@ -176,10 +176,10 @@
 </head>
 
 <body>
-    <form action="{{ route('logout') }}" method="post" id="patient_logout">
+    <form action="{{ localUrl(route('logout')) }}" method="post" id="patient_logout">
         @csrf
     </form>
-    <form action="{{ route('admin.logout') }}" method="post" id="admin_logout">
+    <form action="{{ localUrl(route('admin.logout')) }}" method="post" id="admin_logout">
         @csrf
     </form>
     <div id="page-container"
@@ -359,6 +359,21 @@
                             </ul>
                         </li>
                         @endauth
+                        <li>
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#">
+                                <i class="si si-puzzle"></i>{{ __("Languages") }}
+                            </a>
+                            <ul>
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li>
+                                    <a rel="alternate" hreflang="{{ $localeCode }}"
+                                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
                     <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout"
                         data-action="sidebar_toggle">

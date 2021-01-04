@@ -52,7 +52,7 @@
                     <div class="row justify-content-center px-5">
                         <div class="col-sm-8 col-md-6 col-xl-4">
                             <form class="js-validation-reminder" method="POST"
-                                action="{{ route('admin.password.email') }}" novalidate="novalidate">
+                                action="{{ localUrl(route('admin.password.email')) }}" novalidate="novalidate">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <div class="form-group row">

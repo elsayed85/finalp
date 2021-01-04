@@ -1,6 +1,10 @@
 <nav class="header">
+    <h1 class="text-lg px-6">
+        <a href="{{ route('home') }}">
+            {{ config('app.name') }}
 
-    <h1 class="text-lg px-6">{{ config('app.name') }}</h1>
+        </a>
+    </h1>
 
     <ul class="flex-grow justify-end pr-2">
         <li>
@@ -10,7 +14,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('languages.translations.index', config('app.locale')) }}" class="{{ set_active('*/translations') }}">
+            <a href="{{ route('languages.translations.index', config('app.locale')) }}"
+                class="{{ set_active('*/translations') }}">
                 @include('translation::icons.translate')
                 {{ __('translation::translation.translations') }}
             </a>
