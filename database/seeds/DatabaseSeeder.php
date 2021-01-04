@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
         Admin::create([
             'email' => "elsayedkamal581999@gmail.com",
             'password' =>  Hash::make("password"),
-            'name' => "admin sayed"
+            'name' => "Admin sayed"
         ]);
 
         User::create([
             'email' => "elsayedkamal581999@gmail.com",
             'password' =>  Hash::make("password"),
-            'name' => "admin sayed"
+            'name' => "User sayed"
         ]);
     }
 }

@@ -34,9 +34,5 @@
             onclick="document.getElementById('logout').submit();">
             <i class="si si-logout mr-5"></i> Sign Out
         </a>
-
-        <form action="{{ route('admin.logout') }}" method="post" id="logout">
-            @csrf
-        </form>
     </div>
 </div>

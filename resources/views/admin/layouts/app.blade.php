@@ -35,6 +35,9 @@ $authadmin = auth()->guard("admin")->user();
 </head>
 
 <body>
+    <form action="{{ route('admin.logout') }}" method="post" id="logout">
+        @csrf
+    </form>
     <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
         <!-- Side Overlay-->
         <aside id="side-overlay">

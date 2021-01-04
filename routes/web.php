@@ -16,14 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name("home");
 
 
-Route::view('/test' , "admin.users.index");
-
 // patient
 Auth::routes();
-
-Route::get("logout" , function(){
-    auth()->logout();
-});
 
 Route::group(['prefix' => 'admin' , 'as' => 'admin.'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
