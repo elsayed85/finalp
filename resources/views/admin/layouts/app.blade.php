@@ -23,9 +23,9 @@ $authadmin = auth()->guard("admin")->user();
     <!-- Fonts and Styles -->
     @yield('css_before')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
-    <link rel="stylesheet" id="css-main" href="{{ mix('/css/codebase.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
 
-    <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/corporate.css') }}"> -->
+    <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('/css/themes/corporate.css') }}"> -->
     @yield('css_after')
 
     <!-- Scripts -->
@@ -262,10 +262,10 @@ $authadmin = auth()->guard("admin")->user();
 
     @yield('js_before')
     <!-- Codebase Core JS -->
-    <script src="{{ mix('js/codebase.app.js') }}"></script>
+    <script src="{{ asset('js/codebase.app.js') }}"></script>
 
     <!-- Laravel Scaffolding JS -->
-    <!-- <script src="{{ mix('js/laravel.app.js') }}"></script> -->
+    <!-- <script src="{{ asset('js/laravel.app.js') }}"></script> -->
 
     @yield('js_after')
 </body>
