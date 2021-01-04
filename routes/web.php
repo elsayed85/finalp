@@ -13,10 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'admin.landing');
+
+Route::match(['get', 'post'], '/dashboard', function(){
+    return view('admin.dashboard');
 });
+Route::view('/pages/slick', 'admin.pages.slick');
+Route::view('/pages/datatables', 'admin.pages.datatables');
+Route::view('/pages/blank', 'admin.pages.blank');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin' , 'as' => 'admin'], function () {
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'AdminAuth\LoginController@login')->name("login.post");
+  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+
+  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm')->name('password.resetform');
+});
