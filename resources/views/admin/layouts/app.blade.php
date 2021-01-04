@@ -99,10 +99,9 @@ $authadmin = auth()->guard("admin")->user();
 
                         <!-- Logo -->
                         <div class="content-header-item">
-                            <a class="link-effect font-w700" href="/">
+                            <a class="link-effect font-w700" href="{{ route('home') }}">
                                 <i class="si si-fire text-primary"></i>
-                                <span class="font-size-xl text-dual-primary-dark">code</span><span
-                                    class="font-size-xl text-primary">base</span>
+                                <span class="font-size-xl text-dual-primary-dark">{{ config('app.name') }}</span>
                             </a>
                         </div>
                         <!-- END Logo -->
