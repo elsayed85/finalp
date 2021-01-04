@@ -21,19 +21,21 @@
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="/assets/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="shortcut icon" href="{{ asset("/assets/media/favicons/favicon.png") }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset("/assets/media/favicons/favicon-192x192.png" ) }}
+    ">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ asset("/assets/media/favicons/apple-touch-icon-180x180.png") }}">
     <!-- END Icons -->
 
     <!-- Stylesheets -->
     <!-- Fonts and Codebase framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
-    <link rel="stylesheet" id="css-main" href="/assets/css/codebase.min.css">
+    <link rel="stylesheet" id="css-main" href="{{ asset("/assets/css/codebase.min.css") }}">
     @yield('css')
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="/assets/css/themes/flat.min.css"> -->
+    <!-- <link rel="stylesheet" id="css-theme" href="{{ asset("/assets/css/themes/flat.min.css") }}> -->
 
     <!--
             Basic RTL CSS Overwrites (Please consider moving it in an external CSS file - it is added inline just for demostration)
@@ -349,7 +351,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a  onclick="document.getElementById('admin_logout').submit();">
+                                    <a onclick="document.getElementById('admin_logout').submit();">
                                         <i class="si si-wrench"></i>
                                         Logout
                                     </a>
@@ -503,8 +505,8 @@
     </div>
 
     <!-- Codebase JS -->
-    <script src="/assets/js/codebase.core.min.js"></script>
-    <script src="/assets/js/codebase.app.min.js"></script>
+    <script src="{{ asset("/assets/js/codebase.core.min.js"></script>
+    <script src="{{ asset("/assets/js/codebase.app.min.js"></script>
     @yield('js')
 </body>
 
