@@ -20,7 +20,6 @@ Route::post('login', [LoginController::class, "login"])->name('login');
 Route::post('reset', [ForgotPasswordController::class, "reset"])->name('reset');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
     Route::group(['prefix' => 'user', 'namespace' => "User"], function () {
         Route::post('logout', [LogoutController::class, "__invoke"])->name('logout');
         Route::post('update-avatar', [AvatarController::class, "__invoke"])->name('update_avatar');
@@ -28,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::group(['prefix' => 'status', 'as' => "status"], function () {
             Route::get('all', [StatusController::class, "all"])->name('all');
             Route::get('email', [StatusController::class, "email"])->name('email');
+            Route::get('phone', [StatusController::class, "phone"])->name('phone');
         });
     });
 });
