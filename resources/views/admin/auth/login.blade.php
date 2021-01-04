@@ -1,68 +1,112 @@
-@extends('admin.layouts.auth')
+<!doctype html>
+<html lang="en" class="no-focus">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/login') }}">
-                        {{ csrf_field() }}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+    <title>{{ config('app.name') }} | login</title>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+    <link rel="shortcut icon" href="/assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicons/apple-touch-icon-180x180.png">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
+    <link rel="stylesheet" id="css-main" href="/assets/css/codebase.min.css">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
+</head>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+<body>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
+    <div id="page-container" class="main-content-boxed">
+
+        <!-- Main Container -->
+        <main id="main-container">
+
+            <!-- Page Content -->
+            <div class="bg-gd-dusk">
+                <div class="hero-static content content-full bg-white invisible" data-toggle="appear">
+                    <!-- Header -->
+                    <div class="py-30 px-5 text-center">
+                        <a class="link-effect font-w700" href="{{ route('home') }}">
+                            <i class="si si-fire"></i>
+                            <span class="font-size-xl text-primary-dark">{{ config('app.name') }}</span>
+                        </a>
+                        <h1 class="h2 font-w700 mt-50 mb-10">Admin Dashboard</h1>
+                        <h2 class="h4 font-w400 text-muted mb-0">Please sign in</h2>
+                    </div>
+                    <!-- END Header -->
+
+                    <!-- Sign In Form -->
+                    <div class="row justify-content-center px-5">
+                        <div class="col-sm-8 col-md-6 col-xl-4">
+                            <form class="js-validation-signin" method="POST" action="{{ url('/admin/login') }}">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-material floating">
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                                id="login-username" name="email" value="{{ old('email') }}">
+                                            <label for="login-username">{{ __('E-Mail Address') }}</label>
+
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-material floating">
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="login-password"
+                                                name="password">
+                                            <label for="login-password">{{ __('Password') }}</label>
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row gutters-tiny">
+                                    <div class="col-12 mb-10">
+                                        <button type="submit"
+                                            class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                                            <i class="si si-login mr-10"></i> Sign In
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6 mb-5">
+                                        <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary"
+                                            href="{{ route('admin.password.reset') }}">
+                                            <i class="fa fa-warning text-muted mr-5"></i> Forgot password
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/admin/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    <!-- END Sign In Form -->
                 </div>
             </div>
-        </div>
+            <!-- END Page Content -->
+
+        </main>
+        <!-- END Main Container -->
     </div>
-</div>
-@endsection
+    <!-- END Page Container -->
+    <script src="/assets/js/codebase.core.min.js"></script>
+
+    <script src="/assets/js/codebase.app.min.js"></script>
+
+    <!-- Page JS Plugins -->
+    <script src="/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+
+    <!-- Page JS Code -->
+    <script src="/assets/js/pages/op_auth_signin.min.js"></script>
+</body>
+
+</html>

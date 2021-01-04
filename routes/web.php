@@ -13,15 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'admin.landing');
+Route::view('/', 'welcome')->name("home");
 
-Route::match(['get', 'post'], '/dashboard', function(){
-    return view('admin.dashboard');
-});
 
-Route::view('/pages/slick', 'admin.pages.slick');
-Route::view('/pages/datatables', 'admin.pages.datatables');
-Route::view('/pages/blank', 'admin.pages.blank');
+Route::view('/test' , "admin.users.index");
 
 // patient
 Auth::routes();
@@ -30,7 +25,7 @@ Route::get("logout" , function(){
     auth()->logout();
 });
 
-Route::group(['prefix' => 'admin' , 'as' => 'admin'], function () {
+Route::group(['prefix' => 'admin' , 'as' => 'admin.'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login')->name("login.post");
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');

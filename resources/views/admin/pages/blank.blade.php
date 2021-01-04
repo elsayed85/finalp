@@ -1,4 +1,4 @@
-@extends('admin.layouts.backend')
+@extends('admin.layouts.app')
 
 @section('content')
     <!-- Page Content -->

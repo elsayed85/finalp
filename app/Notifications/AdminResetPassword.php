@@ -2,11 +2,15 @@
 
 namespace App\Notifications;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AdminResetPassword extends Notification
+class AdminResetPassword extends Notification implements ShouldQueue
 {
+     use Queueable;
+
     /**
      * The password reset token.
      *
@@ -45,7 +49,7 @@ class AdminResetPassword extends Notification
     {
         return (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url('admin/password/reset', $this->token))
+            ->action('Reset Password', route('admin.password.resetform', ["token" => $this->token,"email" =>  $notifiable->email]))
             ->line('If you did not request a password reset, no further action is required.');
     }
 }

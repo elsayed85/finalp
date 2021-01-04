@@ -77,4 +77,5 @@ class ResetPasswordController extends Controller
     {
         return Auth::guard('admin');
     }
+
 }
