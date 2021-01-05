@@ -2,28 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
+        // homepage
         Route::view('/', 'welcome')->name("home");
 
         // patient
         Auth::routes();
+        Route::get('login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');
+        Route::post('login/locked', 'Auth\LoginController@unlock')->name('login.unlock');
 
+        // Admin
         Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
             Route::post('/login', 'AdminAuth\LoginController@login')->name("login.post");

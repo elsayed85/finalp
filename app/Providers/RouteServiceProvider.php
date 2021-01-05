@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -69,8 +70,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAdminRoutes()
     {
         Route::group([
-            'middleware' => ['web', 'admin', 'auth:admin'],
-            'prefix' => 'admin',
+            'middleware' => ['web', 'admin', 'auth:admin', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+            'prefix' => LaravelLocalization::setLocale() . '/admin',
             'as' => 'admin.',
             'namespace' => $this->namespace . "\Admin",
         ], function ($router) {
@@ -82,8 +83,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapPatientRoutes()
     {
         Route::group([
-            'middleware' => ['web', 'auth'],
-            'prefix' => 'patient',
+            'middleware' => ['web', 'auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+            'prefix' => LaravelLocalization::setLocale() . '/patient',
             'as' => 'patient.',
             'namespace' => $this->namespace . "\Patient",
         ], function ($router) {

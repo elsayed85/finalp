@@ -1,47 +1,110 @@
-@extends('patient.layouts.app')
+<!doctype html>
+<html lang="en" class="no-focus">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <title>{{ config('app.name') }} | Reset Password</title>
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="{{ asset("/assets/media/favicons/favicon.png") }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset("/assets/media/favicons/favicon-192x192.png") }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ asset("/assets/media/favicons/apple-touch-icon-180x180.png") }}">
+    <!-- END Icons -->
 
-                    <form method="POST" action="{{ localUrl(route('password.email')) }}">
-                        @csrf
+    <!-- Stylesheets -->
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <!-- Fonts and Codebase framework -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
+    <link rel="stylesheet" id="css-main" href="{{ asset("/assets/css/codebase.min.css") }}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+</head>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<body>
+
+    <div id="page-container" class="main-content-boxed side-trans-enabled">
+
+        <!-- Main Container -->
+        <main id="main-container" style="min-height: 389px;">
+
+            <!-- Page Content -->
+            <div class="bg-gd-lake">
+                <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn"
+                    data-toggle="appear">
+                    <!-- Header -->
+                    <div class="py-30 px-5 text-center">
+                        <a class="link-effect font-w700" href="{{ route('home') }}">
+                            <i class="si si-fire"></i>
+                            <span class="font-size-xl text-primary-dark">{{ config('app.name') }}</span>
+                        </a>
+                        <h1 class="h2 font-w700 mt-50 mb-10">Patient | Reset Password</h1>
+                        <h2 class="h4 mt-50 mb-10">Don’t worry, we’ve got your back</h4>
+
+                            @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
                             </div>
-                        </div>
+                            @else
+                            <h2 class="h4 font-w400 text-muted mb-0">Please enter your email</h2>
+                            @endif
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                    </div>
+                    <!-- END Header -->
+
+                    <!-- Reminder Form -->
+                    <div class="row justify-content-center px-5">
+                        <div class="col-sm-8 col-md-6 col-xl-4">
+                            <form class="js-validation-reminder" method="POST"
+                                action="{{ localUrl(route('password.email')) }}" novalidate="novalidate">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-material floating">
+                                            <input type="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                id="login-username" name="email" value="{{ old('email') }}">
+                                            <label for="login-username">{{ __('E-Mail Address') }}</label>
+
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit"
+                                        class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                                        <i class="fa fa-asterisk mr-10"></i> Password Reminder
+                                    </button>
+                                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary"
+                                        href="{{ route('login') }}">
+                                        <i class="si si-login text-muted mr-10"></i> Sign In
+                                    </a>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+                    <!-- END Reminder Form -->
                 </div>
             </div>
-        </div>
+            <!-- END Page Content -->
+
+        </main>
+        <!-- END Main Container -->
     </div>
-</div>
-@endsection
+    <!-- END Page Container -->
+    <script src="{{ asset("/assets/js/codebase.core.min.js") }}"></script>
+
+    <script src="{{ asset("/assets/js/codebase.app.min.js") }}"></script>
+
+    <!-- Page JS Plugins -->
+    <script src="{{ asset("/assets/js/plugins/jquery-validation/jquery.validate.min.js") }}"></script>
+
+    <!-- Page JS Code -->
+    <script src="{{ asset("/assets/js/pages/op_auth_signin.min.js") }}"></script>
+</body>
+
+</html>
