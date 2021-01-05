@@ -13,8 +13,6 @@ Route::group(
 
         // patient
         Auth::routes();
-        Route::get('login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');
-        Route::post('login/locked', 'Auth\LoginController@unlock')->name('login.unlock');
 
         // Admin
         Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

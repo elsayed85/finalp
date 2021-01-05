@@ -61,14 +61,14 @@ class User extends Authenticatable implements HasMedia, Auditable
     {
         $this->addMediaCollection('avatar')
             ->singleFile()
-            ->useFallbackUrl('https://ui-avatars.com/api/?rounded=true&size=200&name=' . $this->name)
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/jpg']);
     }
 
 
     public function getAvatarAttribute()
     {
-        return optional($this->getFirstMedia("avatar"))->getFullUrl();
+        $url = $this->getFirstMediaUrl("avatar");
+        return !(is_null($url) || empty($url)) ? asset($url) : 'https://ui-avatars.com/api/?rounded=true&size=200&name=' . $this->name;
     }
 
     public function phoneIsVerified()

@@ -40,6 +40,6 @@ class ConfirmPasswordController extends Controller
 
     public function showConfirmForm()
     {
-        return view('patient.tauth.passwords.confirm');
+        return view('patient.auth.passwords.confirm');
     }
 }
