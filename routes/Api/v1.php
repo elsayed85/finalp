@@ -15,7 +15,7 @@ Route::group(['prefix' => 'hardware', 'as' => "hardware."], function () {
         return "hi ardino";
     });
 
-    Route::get('send', function () {
+    Route::match(['post', 'get'], 'send', function () {
         $config['lat'] = request('lat'); # 30.939293745909936
         $config['lng'] = request('lng'); # 31.29060731951297
         event(new sendPositionEvent($config));
