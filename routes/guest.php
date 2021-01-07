@@ -10,6 +10,7 @@ Route::group(
     function () {
         // homepage
         Route::view('/', 'welcome')->name("home");
+        Route::view('test', 'test')->name("test");
 
         // patient
         Auth::routes();

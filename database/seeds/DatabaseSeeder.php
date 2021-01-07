@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->appointments()->saveMany(factory(Appointment::class, 5)->make());
+
+        $this->call(simulateCarMovemntsSeeder::class);
     }
 }

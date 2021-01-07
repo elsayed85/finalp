@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\sendPositionEvent;
 use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'hardware', 'as' => "hardware."], function () {
     Route::get('test', function () {
         return "hi ardino";
+    });
+
+    Route::post('send', function () {
+        $config['lat'] = request('lat'); # 30.939293745909936
+        $config['lng'] = request('lng'); # 31.29060731951297
+        event(new sendPositionEvent($config));
+        return response()->json($config);
     });
 });
 

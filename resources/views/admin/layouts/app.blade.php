@@ -239,7 +239,7 @@ $authadmin = auth()->guard("admin")->user();
     @yield('js_before')
     <!-- Codebase Core JS -->
     <script src="{{ asset('js/codebase.app.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('/assets/js/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ asset('js/laravel.app.js') }}"></script> -->
