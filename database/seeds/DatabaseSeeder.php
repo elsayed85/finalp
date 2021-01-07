@@ -1,6 +1,7 @@
 <?php
 
 use App\Admin;
+use App\Models\Appointment;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,10 +21,12 @@ class DatabaseSeeder extends Seeder
             'name' => "Admin sayed"
         ]);
 
-        User::create([
+        $user = User::create([
             'email' => "elsayedkamal581999@gmail.com",
             'password' =>  Hash::make("password"),
             'name' => "User sayed"
         ]);
+
+        $user->appointments()->saveMany(factory(Appointment::class, 5)->make());
     }
 }

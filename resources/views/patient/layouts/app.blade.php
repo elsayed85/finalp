@@ -24,8 +24,15 @@ $authuser = auth()->user();
     @yield('css_before')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
     <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
+    <style>
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
 
     <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('/css/themes/corporate.css') }}"> -->
+
+    @livewireStyles
     @yield('css_after')
 
     <!-- Scripts -->
@@ -235,10 +242,14 @@ $authuser = auth()->user();
     @yield('js_before')
     <!-- Codebase Core JS -->
     <script src="{{ asset('js/codebase.app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ asset('js/laravel.app.js') }}"></script> -->
-
+    <script>
+        jQuery(function(){ Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']); });
+    </script>
+    @livewireScripts
     @yield('js_after')
 </body>
 
