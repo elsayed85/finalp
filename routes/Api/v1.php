@@ -18,7 +18,7 @@ Route::group(['prefix' => 'hardware', 'as' => "hardware."], function () {
 
     Route::match(['post', 'get'], 'send', function (Request $request) {
         $request->validate([
-            'lat' => ['required' , 'string']
+            'lat' => ['required' , 'string'],
             'lng' => ['required' , 'string']
         ]);
 
