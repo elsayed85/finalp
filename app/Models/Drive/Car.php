@@ -4,9 +4,12 @@ namespace App\Models\Drive;
 
 use App\Hospital;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStatus\HasStatuses;
 
 class Car extends Model
 {
+    use HasStatuses;
+    
     /**
      * The attributes that aren't mass assignable.
      *
