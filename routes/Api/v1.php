@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\User\AvatarController;
 use App\Http\Controllers\Api\V1\User\LogoutController;
 use App\Http\Controllers\Api\V1\User\StatusController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,14 @@ Route::group(['prefix' => 'hardware', 'as' => "hardware."], function () {
         return "hi ardino";
     });
 
-    Route::match(['post', 'get'], 'send', function () {
-        $config['lat'] = request('lat'); # 30.939293745909936
-        $config['lng'] = request('lng'); # 31.29060731951297
+    Route::match(['post', 'get'], 'send', function (Request $request) {
+        $request->validate([
+            'lat' => ['required' , 'string']
+            'lng' => ['required' , 'string']
+        ]);
+
+        $config['lat'] = $request->lat; # 30.939293745909936
+        $config['lng'] = $request->lng; # 31.29060731951297
         event(new sendPositionEvent($config));
         return response()->json($config);
     });
