@@ -2,7 +2,7 @@
 @section('title' , "Calendar")
 
 @section('css_after')
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link href="{{ asset('/assets/css/tailwind.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/js/plugins/flatpickr/flatpickr.min.css') }}">
 @endsection
 
