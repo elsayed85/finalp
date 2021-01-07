@@ -22,7 +22,7 @@ class simulateCarMovemntsSeeder extends Seeder
         ];
         $now = now();
         foreach ($positions as $position) {
-            dispatch(new SendPositionJob($position))->delay($now->addSeconds(5));
+            dispatch(new SendPositionJob($position))->delay($now->addSeconds(15));
         }
     }
 }
