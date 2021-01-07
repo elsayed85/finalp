@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>{{ config('app.name') }} | Register</title>
+    <title>{{ config('app.name') }} | Hospital Register</title>
 
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
     <link rel="shortcut icon" href="{{ asset("/assets/media/favicons/favicon.png") }}">
@@ -38,7 +38,7 @@
                             <i class="si si-fire"></i>
                             <span class="font-size-xl text-primary-dark">{{ config('app.name') }}</span>
                         </a>
-                        <h1 class="h2 font-w700 mt-50 mb-10">Create New Account</h1>
+                        <h1 class="h2 font-w700 mt-50 mb-10">Create New Hospital Account</h1>
                         <h2 class="h4 font-w400 text-muted mb-0">Please add your details</h2>
                     </div>
                     <!-- END Header -->
@@ -46,7 +46,7 @@
                     <!-- Sign In Form -->
                     <div class="row justify-content-center px-5">
                         <div class="col-sm-8 col-md-6 col-xl-4">
-                            <form class="js-validation-signin" method="POST" action="{{ localUrl(route('register')) }}">
+                            <form class="js-validation-signin" method="POST" action="{{ localUrl(route('hospital.register')) }}">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-12">
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="col-6">
                                         <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary"
-                                            href="{{ route('login') }}">
+                                            href="{{ route('hospital.login') }}">
                                             <i class="si si-login text-muted mr-10"></i> Sign In
                                         </a>
                                     </div>

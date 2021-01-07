@@ -36,6 +36,11 @@ return [
     */
 
     'guards' => [
+        'hospital' => [
+            'driver' => 'session',
+            'provider' => 'hospitals',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -71,6 +76,11 @@ return [
     */
 
     'providers' => [
+        'hospitals' => [
+            'driver' => 'eloquent',
+            'model' => App\Hospital::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
@@ -103,6 +113,12 @@ return [
     */
 
     'passwords' => [
+        'hospitals' => [
+            'provider' => 'hospitals',
+            'table' => 'hospital_password_resets',
+            'expire' => 60,
+        ],
+
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',

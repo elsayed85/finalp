@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public const HOME = '/home';
     public const PatientHOME = '/patient/home';
+    public const HospitalHOME = '/hospital/home';
     public const AdminHOME = '/admin/home';
 
     /**
@@ -53,11 +54,11 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapGuestRoutes();
 
-        $this->mapPatientRoutes();
-
         $this->mapAdminRoutes();
 
-        //
+        $this->mapHospitalRoutes();
+
+        $this->mapPatientRoutes();
     }
 
     /**
@@ -94,6 +95,25 @@ class RouteServiceProvider extends ServiceProvider
 
 
     /**
+     * Define the "hospital" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapHospitalRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'hospital', 'auth:hospital', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+            'prefix' => 'hospital',
+            'as' => 'hospital.',
+            'namespace' => $this->namespace . "\Hospital",
+        ], function ($router) {
+            require base_path('routes/hospital.php');
+        });
+    }
+
+    /**
      * Define the "web" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
@@ -102,9 +122,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapGuestRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])
             ->namespace($this->namespace)
-            ->group(base_path('routes/guest.php'));
+            ->group(base_path('routes/web.php'));
     }
 
     /**

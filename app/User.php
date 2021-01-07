@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Appointment;
+use App\Models\Drive\Drive;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -80,5 +81,10 @@ class User extends Authenticatable implements HasMedia, Auditable
     public function appointments()
     {
         return $this->morphMany(Appointment::class, "owner");
+    }
+
+    public function drives()
+    {
+        return $this->hasMany(Drive::class);
     }
 }
