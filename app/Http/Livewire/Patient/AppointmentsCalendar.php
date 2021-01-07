@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Patient;
 use App\Models\Appointment;
 use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class AppointmentsCalendar extends LivewireCalendar
@@ -34,7 +35,7 @@ class AppointmentsCalendar extends LivewireCalendar
         $this->validateOnly($propertyName, $this->rules);
     }
 
-    public function events()
+    public function events() : Collection
     {
         return auth()->user()->appointments()
             ->whereDate('scheduled_at', '>=', $this->gridStartsAt)
