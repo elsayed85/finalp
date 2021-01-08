@@ -4,12 +4,24 @@ namespace App\Models\Drive;
 
 use App\Hospital;
 use Illuminate\Database\Eloquent\Model;
+use Malhal\Geographical\Geographical;
 use Spatie\ModelStatus\HasStatuses;
 
 class Car extends Model
 {
-    use HasStatuses;
+    use HasStatuses, Geographical;
+
+    const LATITUDE  = 'lat';
+    const LONGITUDE = 'lng';
+
+    protected static $kilometers = true;
+
+    protected $casts = [
+        'lat' => 'double',
+        'lng' => 'double'
+    ];
     
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -17,10 +29,6 @@ class Car extends Model
      */
     protected $guarded = [];
 
-    public function hospital()
-    {
-        return $this->belongsTo(Hospital::class);
-    }
 
     public function drives()
     {

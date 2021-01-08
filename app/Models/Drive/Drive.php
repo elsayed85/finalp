@@ -5,11 +5,23 @@ namespace App\Models\Drive;
 use App\Models\Drive\Traits\DrivingTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Malhal\Geographical\Geographical;
 use Spatie\ModelStatus\HasStatuses;
 
 class Drive extends Model
 {
-    use DrivingTrait, HasStatuses;
+    use DrivingTrait, HasStatuses, Geographical;
+
+    const LATITUDE  = 'lat';
+    const LONGITUDE = 'lng';
+
+    protected static $kilometers = true;
+
+    protected $casts = [
+        'lat' => 'double',
+        'lng' => 'double'
+    ];
+
 
     /**
      * The attributes that aren't mass assignable.

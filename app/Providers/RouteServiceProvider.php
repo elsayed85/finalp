@@ -137,7 +137,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'middleware' => ['api', 'api_version:v1', 'api_localization'],
+            'middleware' => ['enforceJson', 'api', 'api_version:v1', 'api_localization'],
             'namespace'  => "{$this->apiNamespace}\V1",
             'prefix'     => 'api/v1',
         ], function ($router) {

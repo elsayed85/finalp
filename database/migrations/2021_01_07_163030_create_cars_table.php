@@ -16,8 +16,8 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_available')->default(false);
-            $table->unsignedBigInteger('hospital_id')->nullable();
-            $table->foreign('hospital_id')->on('hospitals')->references('id')->nullOnDelete();
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
             $table->timestamps();
         });
     }

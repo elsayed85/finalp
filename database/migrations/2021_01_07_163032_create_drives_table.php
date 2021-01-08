@@ -15,13 +15,12 @@ class CreateDrivesTable extends Migration
     {
         Schema::create('drives', function (Blueprint $table) {
             $table->id();
-            $table->string('s_lat');
-            $table->string('s_lng');
+            $table->double('s_lat');
+            $table->double('s_lng');
             $table->unsignedBigInteger('car_id')->nullable();
             $table->foreign('car_id')->on('cars')->references('id')->nullOnDelete();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->on('users')->references('id')->nullOnDelete();
-            $table->mediumText('notes')->nullable();
             $table->timestamps();
         });
     }

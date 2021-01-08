@@ -4,8 +4,10 @@ namespace App\Exceptions;
 
 use Error;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Throwable;
 use TypeError;
 
@@ -55,8 +57,13 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($request->is("api/*")) {
-            $request->headers->set('Accept', 'application/json');
-            // handel api here
+            if($e instanceof AuthorizationException ){
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'success' => false,
+                    'code' => 401
+                ] ,  401);
+            }
         }
         return parent::render($request, $e);
     }

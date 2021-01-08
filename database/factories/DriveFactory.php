@@ -13,6 +13,5 @@ $factory->define(Drive::class, function (Faker $faker) {
         's_lng' => $faker->longitude,
         "car_id" => Car::Available()->get()->random(),
         'user_id' => User::all()->random(),
-        'notes' => $faker->paragraph()
     ];
 });

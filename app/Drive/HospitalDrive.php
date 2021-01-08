@@ -58,17 +58,6 @@ class HospitalDrive
         return $this->drive;
     }
 
-    public function cancel()
-    {
-        $this->drive->setAsCanceled();
-
-        if (!is_null($this->drive->car_id)) {
-            $this->drive->car->setAsAvailable();
-        }
-
-        return true;
-    }
-
     public function finish()
     {
         $this->drive->setAsFinished();

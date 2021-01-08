@@ -4,9 +4,17 @@ namespace App\Models\Hospital;
 
 use App\Hospital;
 use Illuminate\Database\Eloquent\Model;
+use Malhal\Geographical\Geographical;
 
 class Location extends Model
 {
+    use Geographical;
+
+    const LATITUDE  = 'lat';
+    const LONGITUDE = 'lng';
+
+    protected static $kilometers = true;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -20,6 +28,11 @@ class Location extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    protected $casts = [
+        'lat' => 'double',
+        'lng' => 'double'
+    ];
 
         /**
      * The table associated with the model.

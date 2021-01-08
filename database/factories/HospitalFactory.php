@@ -17,8 +17,6 @@ $factory->define(Hospital::class, function (Faker $faker) {
 
 
 $factory->afterCreating(Hospital::class, function (Hospital $hospital, Faker $faker) {
-    # every hospital has 3 cars
-    $hospital->cars()->saveMany(factory(Car::class, 3)->make());
     # every hospital has one location
     $hospital->location()->create([
         'lat' => $faker->latitude,

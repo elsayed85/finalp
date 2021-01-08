@@ -11,11 +11,6 @@ trait DrivingTrait
         return $this;
     }
 
-    public function setAsCanceled()
-    {
-        $this->setStatus('canceled');
-        return $this;
-    }
 
     public function setAsActive()
     {

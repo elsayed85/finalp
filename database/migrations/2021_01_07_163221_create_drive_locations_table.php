@@ -15,8 +15,8 @@ class CreateDriveLocationsTable extends Migration
     {
         Schema::create('drive_locations', function (Blueprint $table) {
             $table->id();
-            $table->string('d_lat');
-            $table->string('d_lng');
+            $table->double('d_lat');
+            $table->double('d_lng');
             $table->unsignedBigInteger('drive_id');
             $table->foreign('drive_id')->on('drives')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

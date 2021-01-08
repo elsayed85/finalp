@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\APIVersion;
+use App\Http\Middleware\EnforceJson;
 use App\Http\Middleware\localization;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -78,6 +79,7 @@ class Kernel extends HttpKernel
 
         'api_version' => APIVersion::class,
         'api_localization' => localization::class,
+        'enforceJson' => EnforceJson::class,
 
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,

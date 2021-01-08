@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Car::class, function (Faker $faker) {
     return [
-        "is_available" => true
+        "is_available" => true,
+        'lat' => $faker->latitude,
+        'lng' => $faker->longitude
     ];
 });

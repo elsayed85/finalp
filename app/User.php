@@ -2,6 +2,7 @@
 
 namespace App;
 
+use \OwenIt\Auditing\Auditable as AuditableTrait;
 use App\Models\Appointment;
 use App\Models\Drive\Drive;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,16 +10,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
+use Malhal\Geographical\Geographical;
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use OwenIt\Auditing\Contracts\Auditable;
-use \OwenIt\Auditing\Auditable as AuditableTrait;
 
 // [USER] Model is [Patient]
 
 class User extends Authenticatable implements HasMedia, Auditable
 {
-    use Notifiable, HasApiTokens, HasMediaTrait, Billable, AuditableTrait;
+    use Notifiable, HasApiTokens, HasMediaTrait, Billable, AuditableTrait, Geographical;
+
+    const LATITUDE  = 'lat';
+    const LONGITUDE = 'lng';
 
     /**
      * The attributes that are mass assignable.
@@ -46,6 +50,8 @@ class User extends Authenticatable implements HasMedia, Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
+        'lat' => 'double',
+        'lng' => 'double'
     ];
 
     /**
