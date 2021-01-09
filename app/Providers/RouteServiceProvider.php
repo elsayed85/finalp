@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -50,6 +51,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        DB::enableQueryLog();
+
         $this->mapApiRoutes();
 
         $this->mapGuestRoutes();

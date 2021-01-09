@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\User;
+namespace App\Http\Requests\Api\V1\User\Drive;
 
 use App\Rules\LocationCoordinates\LatitudeRule;
 use App\Rules\LocationCoordinates\LongitudeRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCurrentLocationRequest extends FormRequest
+class MakeDriveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,17 @@ class UpdateCurrentLocationRequest extends FormRequest
     public function rules()
     {
         return [
-            "lat" => ['required', new LatitudeRule()],
-            'lng' => ['required', new LongitudeRule()]
+            's_lat' => ['required', new LatitudeRule()],
+            's_lng' => ['required',  new LongitudeRule()]
         ];
     }
 
     protected function prepareForValidation(): void
     {
-        if ($this->has('lat') && $this->has('lng')) {
+        if ($this->has('s_lat') && $this->has('s_lng')) {
             $this->merge([
-                'lat' => (double) $this->lat,
-                'lng' => (double) $this->lng,
+                's_lat' => (float) $this->s_lat,
+                's_lng' => (float) $this->s_lng,
             ]);
         }
     }

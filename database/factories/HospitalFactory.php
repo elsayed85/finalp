@@ -4,6 +4,7 @@
 
 use App\Hospital;
 use App\Models\Drive\Car;
+use App\Models\Hospital\MedicalSpecialties;
 use Faker\Generator as Faker;
 
 $factory->define(Hospital::class, function (Faker $faker) {
@@ -22,4 +23,6 @@ $factory->afterCreating(Hospital::class, function (Hospital $hospital, Faker $fa
         'lat' => $faker->latitude,
         'lng' => $faker->longitude
     ]);
+
+    $hospital->specialties()->sync(MedicalSpecialties::all()->random(rand(6,10)));
 });

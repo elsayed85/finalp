@@ -55,6 +55,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('locations', [CarController::class, 'locations'])->name('locations');
         });
 
+        Route::get("drives", "DriveController@index")->name('drive.index');
+        Route::post("makedrive", "DriveController@makedrive")->name('makeDrive');
+        Route::post("{drive}/change-destination", "DriveController@changeDestination")->name('change_destination');
+
         Route::group(['prefix' => 'status', 'as' => "status"], function () {
             Route::get('all', [StatusController::class, "all"])->name('all');
             Route::get('email', [StatusController::class, "email"])->name('email');

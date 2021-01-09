@@ -25,8 +25,8 @@ class UpdateCurrentLocation extends FormRequest
     {
         if ($this->has('lat') && $this->has('lng')) {
             $this->merge([
-                'lat' => (float) $this->lat,
-                'lng' => (float) $this->lng,
+                'lat' => (double) $this->lat,
+                'lng' => (double) $this->lng,
             ]);
         }
     }

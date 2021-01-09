@@ -13,6 +13,18 @@ class Location extends Model
      */
     protected $guarded = [];
 
+    protected $casts = [
+        'd_lat' => 'double',
+        'd_lng' => 'double'
+    ];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'drive_locations';
+
 
     public function drive()
     {

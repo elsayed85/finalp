@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Models\Drive\Car;
+use App\Models\Hospital\HospitalSpecialties;
 use App\Models\Hospital\Location;
+use App\Models\Hospital\MedicalSpecialties;
 use App\Notifications\HospitalResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -71,5 +73,9 @@ class Hospital extends Authenticatable implements HasMedia, Auditable
     public function location()
     {
         return $this->hasOne(Location::class);
+    }
+
+    public function specialties(){
+        return $this->belongsToMany(MedicalSpecialties::class , 'hospital_specialties' , 'hospital_id' , 'specialty_id');
     }
 }

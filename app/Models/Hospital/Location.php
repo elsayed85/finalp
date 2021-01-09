@@ -34,7 +34,7 @@ class Location extends Model
         'lng' => 'double'
     ];
 
-        /**
+    /**
      * The table associated with the model.
      *
      * @var string

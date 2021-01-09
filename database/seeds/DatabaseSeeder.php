@@ -41,11 +41,15 @@ class DatabaseSeeder extends Seeder
 
         $user->appointments()->saveMany(factory(Appointment::class, 5)->make());
 
-        factory(Hospital::class, 20)->create(); # ceach hospital has 3 cars
+        $this->call([
+            MedicalSpecialtiesSeeder::class
+        ]);
+
+        factory(Hospital::class, 500)->create(); # ceach hospital has 3 cars
         factory(Car::class, 40)->create(); # ceach hospital has 3 cars
         factory(User::class, 5)->create(); # create patients
 
 
-        // $this->call(simulateCarMovemntsSeeder::class);
+        $this->call(simulateCarMovemntsSeeder::class);
     }
 }

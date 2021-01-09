@@ -16,8 +16,8 @@ class CreateHospitalLocationsTable extends Migration
         Schema::create('hospital_locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId("hospital_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('lat');
-            $table->string('lng');
+            $table->double('lat');
+            $table->double('lng');
         });
     }
 
