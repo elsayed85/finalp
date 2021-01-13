@@ -20,7 +20,7 @@ class Car extends Model
         'lat' => 'double',
         'lng' => 'double'
     ];
-    
+
 
     /**
      * The attributes that aren't mass assignable.
@@ -42,7 +42,7 @@ class Car extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->where('is_available', true);
+        return $query->where('is_available', 1);
     }
 
     public function setAsAvailable()

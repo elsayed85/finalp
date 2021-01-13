@@ -27,11 +27,12 @@ class DriveController extends Controller
     public function makeDrive(MakeDriveRequest $request)
     {
         $patientlocation = $request->only(['s_lat', 's_lng']);
-        $nearestCar = Car::Available()->geofence($request->s_lat, $request->s_lng, 2000, 3000)->orderBy("distance")->first();
+        $nearestCar = Car::Available()->geofence($request->s_lat, $request->s_lng, 5000, 7000)->orderBy("distance")->first();
+
         if (is_null($nearestCar)) {
             return response()->json([
                 'success' =>  false,
-                'message' => 'no avaiable car in range 2Km to 3Km',
+                'message' => 'no avaiable car in range 5Km to 7Km',
                 'user_location' => $patientlocation,
             ]);
         }
