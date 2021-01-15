@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5|^8.0",
         "alexpechkarev/google-maps": "^7.0",
+        "asantibanez/livewire-calendar": "^2.0",
         "astrotomic/laravel-translatable": "^11.9",
         "cviebrock/eloquent-sluggable": "^7.0",
         "facade/ignition": "2.5.1",
