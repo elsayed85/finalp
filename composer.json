@@ -23,6 +23,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
         "livewire/livewire": "^2.3",
+        "facade/ignition": "2.5.1",
         "malhal/laravel-geographical": "^1.0",
         "mcamara/laravel-localization": "^1.6",
         "owen-it/laravel-auditing": "^12.0",

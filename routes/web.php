@@ -13,7 +13,7 @@ Route::group(
         Route::view('test', 'test')->name("test");
 
         // patient
-        Auth::routes();
+        Auth::routes(['verify' => true]);
 
         // Hospital
         Route::group(['prefix' => 'hospital', 'as' => 'hospital.'], function () {

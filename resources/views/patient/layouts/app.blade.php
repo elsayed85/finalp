@@ -39,6 +39,13 @@ $authuser = auth()->user();
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};
     </script>
+
+    @auth()
+    <script>
+        window.patient.userId = {{ auth()->id() }}
+    </script>
+    @endauth
+
 </head>
 
 <body>
@@ -243,6 +250,7 @@ $authuser = auth()->user();
     <!-- Codebase Core JS -->
     <script src="{{ asset('js/codebase.app.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ asset('js/laravel.app.js') }}"></script> -->
@@ -250,6 +258,7 @@ $authuser = auth()->user();
         jQuery(function(){ Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']); });
     </script>
     @livewireScripts
+
     @yield('js_after')
 </body>
 

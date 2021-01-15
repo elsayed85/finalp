@@ -87,7 +87,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapPatientRoutes()
     {
         Route::group([
-            'middleware' => ['web', 'auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+            'middleware' => ['web', 'auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'verified'],
             'prefix' => LaravelLocalization::setLocale() . '/patient',
             'as' => 'patient.',
             'namespace' => $this->namespace . "\Patient",

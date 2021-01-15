@@ -22,9 +22,9 @@
 
     Admin
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+> > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
 
-Multi Language 
+Multi Language
 Multi Verisions For (API)
 Realtime Connections (Pusher , Web Sockets)
-
+Payment Gatwayes (HyperPay , Stripe)

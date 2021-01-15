@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 // [USER] Model is [Patient]
 
-class User extends Authenticatable implements HasMedia, Auditable
+class User extends Authenticatable implements HasMedia, Auditable , MustVerifyEmail
 {
     use Notifiable, HasApiTokens, HasMediaTrait, Billable, AuditableTrait, Geographical;
 
