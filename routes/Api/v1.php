@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'iot/', 'as' => "iot.", 'namespace' => 'IOT'], function () {
+Route::group(['prefix' => 'iot', 'as' => "iot.", 'namespace' => 'IOT'], function () {
     Route::get('test', function (Request $request) {
         return response()->json([
             'data' => $request->all()
