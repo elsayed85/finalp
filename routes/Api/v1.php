@@ -4,11 +4,11 @@ use App\Events\sendPositionEvent;
 use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\IOT\Car\LocationController as CarLocationController;
 use App\Http\Controllers\Api\V1\User\AvatarController;
+use App\Http\Controllers\Api\V1\User\CarController;
 use App\Http\Controllers\Api\V1\User\HospitalController;
 use App\Http\Controllers\Api\V1\User\LocationController;
-use App\Http\Controllers\Api\V1\IOT\Car\LocationController as CarLocationController;
-use App\Http\Controllers\Api\V1\User\CarController;
 use App\Http\Controllers\Api\V1\User\LogoutController;
 use App\Http\Controllers\Api\V1\User\StatusController;
 use Illuminate\Http\Request;
@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'iot', 'as' => "iot.", 'namespace' => 'IOT'], function () {
     Route::get('test', function (Request $request) {
+        Log::alert($request->all());
         return response()->json([
             'data' => $request->all()
         ]);
