@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->boolean('is_available')->default(false);
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }

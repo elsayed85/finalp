@@ -46,7 +46,7 @@ Route::group(['prefix' => 'iot', 'as' => "iot.", 'namespace' => 'IOT'], function
     });
 
     Route::group(['prefix' => 'car', 'namespace' => 'Car', 'as' => 'car.'], function () {
-        Route::post('{car}/update-location', [CarLocationController::class, "updateCurrentLocation"])->name('update_location');
+        Route::post('update-location', [CarLocationController::class, "updateCurrentLocation"])->name('update_location');
     });
 
     Route::match(['post', 'get'], 'send', function (Request $request) {

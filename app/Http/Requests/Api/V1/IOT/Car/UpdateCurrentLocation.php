@@ -2,12 +2,28 @@
 
 namespace App\Http\Requests\Api\V1\IOT\Car;
 
+use App\Models\Drive\Car;
 use App\Rules\LocationCoordinates\LatitudeRule;
 use App\Rules\LocationCoordinates\LongitudeRule;
+use BultonFr\NMEA\Parser;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCurrentLocation extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        $car = Car::where('token', $this->token)->first();
+        $this->merge([
+            'car' => $car
+        ]);
+        return !is_null($car);
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +39,11 @@ class UpdateCurrentLocation extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->has('lat') && $this->has('lng')) {
-            $this->merge([
-                'lat' => (double) $this->lat,
-                'lng' => (double) $this->lng,
-            ]);
-        }
+        $location = $this->location;
+        $data = (object)(new Parser())->readLine($location)->toArray();
+        $this->merge([
+            'lat' => (float) $data->latitude,
+            'lng' => (float) $data->longitude,
+        ]);
     }
 }

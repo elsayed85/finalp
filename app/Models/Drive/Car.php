@@ -4,6 +4,7 @@ namespace App\Models\Drive;
 
 use App\Hospital;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 use Malhal\Geographical\Geographical;
 use Spatie\ModelStatus\HasStatuses;
 
@@ -54,6 +55,17 @@ class Car extends Model
     public function setAsUnAvailable()
     {
         $this->update(['is_available' => false]);
+        return $this;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
         return $this;
     }
 }

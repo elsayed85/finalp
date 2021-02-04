@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
-    public function updateCurrentLocation(UpdateCurrentLocation $request, Car $car)
+    public function updateCurrentLocation(UpdateCurrentLocation $request)
     {
-        $car->update($request->validated());
+        $request->input('car')->update([
+            'lat' => $request->lat,
+            'lng' => $request->lng
+        ]);
         return response()->json([
             'location' => $request->validated(),
             'date' => now(),
