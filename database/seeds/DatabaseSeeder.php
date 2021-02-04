@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
 
         factory(Hospital::class, 500)->create(); # ceach hospital has 3 cars
         factory(Car::class, 40)->create(); # each hospital has 3 cars
+        Car::first()->setToken('1|BVnIlm1p0NOIgWd3qohV1HJoUKQ1oo0Dvx4MhawzcNF9QmSCAh')->save();
         factory(User::class, 5)->create(); # reate patients
 
 
