@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'iot/', 'as' => "iot.", 'namespace' => 'IOT'], function () {
-    Route::get('test', function () {
-        return "hi ardino";
+    Route::get('test', function (Request $request) {
+        return response()->json([
+            'data' => $request->all()
+        ]);
     });
 
     Route::group(['prefix' => 'car', 'namespace' => 'Car', 'as' => 'car.'], function () {

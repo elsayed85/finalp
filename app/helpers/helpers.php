@@ -10,3 +10,5 @@ function qlog()
 {
     dd(DB::getQueryLog());
 }
+
+
