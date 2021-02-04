@@ -12,6 +12,7 @@
         "alexpechkarev/google-maps": "^7.0",
         "asantibanez/livewire-calendar": "^2.0",
         "astrotomic/laravel-translatable": "^11.9",
+        "bulton-fr/nmea-parser": "^1.0",
         "cviebrock/eloquent-sluggable": "^7.0",
         "facade/ignition": "2.5.1",
         "fideloper/proxy": "^4.4",

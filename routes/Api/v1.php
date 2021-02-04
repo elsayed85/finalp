@@ -22,6 +22,14 @@ Route::group(['prefix' => 'iot', 'as' => "iot.", 'namespace' => 'IOT'], function
         ]);
     });
 
+    Route::get('test2', function (Request $request) {
+        $location = $request->location;
+        $data = (new BultonFr\NMEA\Parser())->readLine($location);
+        return response()->json([
+            'data' => $data
+        ]);
+    });
+
     Route::group(['prefix' => 'car', 'namespace' => 'Car', 'as' => 'car.'], function () {
         Route::post('{car}/update-location', [CarLocationController::class, "updateCurrentLocation"])->name('update_location');
     });

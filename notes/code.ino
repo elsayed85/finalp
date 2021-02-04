@@ -11,7 +11,7 @@ void postData() {
    const int httpGetPort = 80;
 
    //the path and file to send the data to:
-   String urlGet = "hardware/send";
+   String urlGet = "iot/test";
 
 
   // We now create and add parameters:
@@ -20,10 +20,9 @@ void postData() {
   String nam = "temp";
   String vint = "92";
 
-  String lat = "";
-  String lng = "";
+  String location = "";
 
-  urlGet += "?lat=" + lat + "&lng=" +  lng;
+  urlGet += "?location=" + location
 
       Serial.print(">>> Connecting to host: ");
       Serial.println(hostGet);
