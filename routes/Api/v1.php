@@ -24,9 +24,24 @@ Route::group(['prefix' => 'iot', 'as' => "iot.", 'namespace' => 'IOT'], function
 
     Route::get('test2', function (Request $request) {
         $location = $request->location;
-        $data = (new BultonFr\NMEA\Parser())->readLine($location);
+        $data = (object)(new BultonFr\NMEA\Parser())->readLine($location)->toArray();
         return response()->json([
-            'data' => $data
+            'data' => [
+                'utcTime' => $data->utcTime,
+                'latitude' => $data->latitude,
+                'latitudeDirection' => $data->latitudeDirection,
+                'longitude' => $data->longitude,
+                'longitudeDirection' => $data->longitudeDirection,
+                'gpsQuality' => $data->gpsQuality,
+                'nbSatellites' => $data->nbSatellites,
+                'horizontalDilutionPrecision' => $data->horizontalDilutionPrecision,
+                'altitude' => $data->altitude,
+                'altitudeUnit' => $data->altitudeUnit,
+                'geoidalSeparation' => $data->geoidalSeparation,
+                'geoidalSeparationUnit' => $data->geoidalSeparationUnit,
+                'ageGpsData' => $data->ageGpsData,
+                'differentialRefStationId' => $data->differentialRefStationId,
+            ]
         ]);
     });
 
