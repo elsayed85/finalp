@@ -11,14 +11,16 @@ class LocationController extends Controller
 {
     public function updateCurrentLocation(UpdateCurrentLocation $request)
     {
-        $request->input('car')->update([
+        $car = $request->input('car');
+
+        $car->update([
             'lat' => $request->lat,
             'lng' => $request->lng
         ]);
+
         return response()->json([
-            'location' => $request->validated(),
-            'date' => now(),
-            'success' => true
+            'car' => $car,
+            'success' => true,
         ]);
     }
 }
