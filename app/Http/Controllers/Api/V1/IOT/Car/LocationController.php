@@ -11,7 +11,7 @@ class LocationController extends Controller
 {
     public function updateCurrentLocation(UpdateCurrentLocation $request)
     {
-        $car = $request->input('car');
+        $car = Car::whereToken($request->token)->first();
 
         $car->update([
             'lat' => $request->lat,
