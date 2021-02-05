@@ -40,6 +40,8 @@ class UpdateCurrentLocation extends FormRequest
     protected function prepareForValidation(): void
     {
         $location = $this->location;
+        var_dump($location);
+        die();
         $data = (object)(new Parser())->readLine($location)->toArray();
         $this->merge([
             'lat' => (float) $data->latitude,
