@@ -1,83 +1,68 @@
-#include <TinyGPS++.h>
-#include <SoftwareSerial.h>
-#define BLYNK_PRINT Serial
 #include <ESP8266WiFi.h>
-#include <BlynkSimpleEsp8266.h>
+#include <WiFiClient.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266HTTPClient.h>
 
-static const int RXPin = 4, TXPin = 5;   // GPIO 4=D2(conneect Tx of GPS) and GPIO 5=D1(Connect Rx of GPS
-static const uint32_t GPSBaud = 9600; //if Baud rate 9600 didn't work in your case then use 4800
+/* Set these to your desired credentials. */
+const char *ssid = "El-Gayyar";  //ENTER YOUR WIFI SETTINGS
+const char *password = "123456789";
 
-TinyGPSPlus gps; // The TinyGPS++ object
-WidgetMap myMap(V0);  // V0 for virtual pin of Map Widget
+//Web/Server address to read/write from
+const String *host = "http://erada-soft.com/ehr/api/v1/iot/car/update-location";
+const String *token = "1|BVnIlm1p0NOIgWd3qohV1HJoUKQ1oo0Dvx4MhawzcNF9QmSCAh";
 
-SoftwareSerial ss(RXPin, TXPin);  // The serial connection to the GPS device
+//=======================================================================
+//                    Power on setup
+//=======================================================================
 
-BlynkTimer timer;
-
-float spd;       //Variable  to store the speed
-float sats;      //Variable to store no. of satellites response
-String bearing;  //Variable to store orientation or direction of GPS
-
-char auth[] = "--------------------";              //Your Project authentication key
-char ssid[] = "-------";                                       // Name of your network (HotSpot or Router name)
-char pass[] = "-------";                                      // Corresponding Password
-
-//unsigned int move_index;         // moving index, to be used later
-unsigned int move_index = 1;       // fixed location for now
-
-
-void setup()
-{
+void setup() {
+  delay(1000);
   Serial.begin(115200);
-  Serial.println();
-  ss.begin(GPSBaud);
-  Blynk.begin(auth, ssid, pass);
-  timer.setInterval(5000L, checkGPS); // every 5s check if GPS is connected, only really needs to be done once
-}
+  WiFi.mode(WIFI_OFF);        //Prevents reconnection issue (taking too long to connect)
+  delay(1000);
+  WiFi.mode(WIFI_STA);        //This line hides the viewing of ESP as wifi hotspot
 
-void checkGPS(){
-  if (gps.charsProcessed() < 10)
-  {
-    Serial.println(F("No GPS detected: check wiring."));
-      Blynk.virtualWrite(V4, "GPS ERROR");  // Value Display widget  on V4 if GPS not detected
-  }
-}
+  WiFi.begin(ssid, password);     //Connect to your WiFi router
+  Serial.println("");
 
-void loop()
-{
-    while (ss.available() > 0)
-    {
-      // sketch displays information every time a new sentence is correctly encoded.
-      if (gps.encode(ss.read()))
-        displayInfo();
-  }
-  Blynk.run();
-  timer.run();
-}
-
-void displayInfo()
-{
-  if (gps.location.isValid() )
-  {
-    float latitude = (gps.location.lat());     //Storing the Lat. and Lon.
-    float longitude = (gps.location.lng());
-
-    Serial.print("LAT:  ");
-    Serial.println(latitude, 6);  // float to x decimal places
-    Serial.print("LONG: ");
-    Serial.println(longitude, 6);
-    Blynk.virtualWrite(V1, String(latitude, 6));
-    Blynk.virtualWrite(V2, String(longitude, 6));
-    myMap.location(move_index, latitude, longitude, "GPS_Location");
-    spd = gps.speed.kmph();               //get speed
-       Blynk.virtualWrite(V3, spd);
-
-       sats = gps.satellites.value();    //get number of satellites
-       Blynk.virtualWrite(V4, sats);
-
-       bearing = TinyGPSPlus::cardinal(gps.course.value()); // get the direction
-       Blynk.virtualWrite(V5, bearing);
+  Serial.print("Connecting");
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
   }
 
- Serial.println();
+  //If connection successful show IP address in serial monitor
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());  //IP address assigned to your ESP
 }
+
+//=======================================================================
+//                    Main Program Loop
+//=======================================================================
+void loop() {
+  HTTPClient http;    //Declare object of class HTTPClient
+
+  String location, postData;
+  location = "$GPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,200.2,M,,,,0000*0E";
+
+  //Post Data
+  postData = "token=" + token + "&location=" + location;
+
+  http.begin(host);              //Specify request destination
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");    //Specify content-type header
+
+  int httpCode = http.POST(postData);   //Send the request
+  String payload = http.getString();    //Get the response payload
+
+  Serial.println(httpCode);   //Print HTTP return code
+  Serial.println(payload);    //Print request response payload
+
+  http.end();  //Close connection
+
+  delay(1000);  //Post Data at every 5 seconds
+}
+//=======================================================================
