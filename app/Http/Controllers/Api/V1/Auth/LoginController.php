@@ -14,7 +14,7 @@ class LoginController extends Controller
     {
         if (auth()->attempt($this->credentials())) {
             return (new LoginResource(["token" => auth()->user()->createToken('mobile')->plainTextToken , 'type' => "Bearer"]));
-        }
+        } 
 
         throw ValidationException::withMessages(['email' => "email or password is wrong"]);
     }
