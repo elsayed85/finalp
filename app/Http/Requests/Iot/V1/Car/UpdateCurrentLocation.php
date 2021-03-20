@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\IOT\Car;
+namespace App\Http\Requests\Iot\V1\Car;
 
 use App\Models\Drive\Car;
 use App\Rules\LocationCoordinates\LatitudeRule;
@@ -17,11 +17,7 @@ class UpdateCurrentLocation extends FormRequest
      */
     public function authorize()
     {
-        $car = Car::where('token', $this->token)->first();
-        $this->merge([
-            'car' => $car
-        ]);
-        return !is_null($car);
+        return true;
     }
 
     /**

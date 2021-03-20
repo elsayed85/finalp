@@ -31,23 +31,7 @@
      <div v-if="authorized">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <Lightbulb :isOn="light_is_on"/>
-                <div>
-                    <RockerSwitch :size="0.9" :value="light_is_on" @change="isOn => (light_is_on = isOn)"/>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <vue-thermometer
-                    :value="temperature_value"
-                    :min="-20"
-                    :max="25"
-                />
-            </div>
-            <div class="col-md-4">
-                <heart
-                    :bpm_value="bpm_value"
-                    :heart_stop="heart_stop"
-                />
+                <div id="realtimemap" style="width:100%; height:600px"></div>
             </div>
         </div>
         <hr/>
@@ -73,7 +57,6 @@
                                     <time-ago
                                         :datetime="data.created_at"
                                         :refresh="1"
-                                        :locale="en"
                                         :tooltip="true"
                                         :long="false"
                                     />
@@ -117,21 +100,19 @@ Vue.use(Toast, {
     timeout: 3048,
 });
 Vue.use(TreeView)
-import Lightbulb from "./Lightbulb";
-import heart from "./heart";
-import RockerSwitch from "vue-rocker-switch";
-import "vue-rocker-switch/dist/vue-rocker-switch.css";
-import VueThermometer from 'vuejs-thermometer'
 import Echo from "laravel-echo";
-import Heart from './heart.vue';
 window.Pusher = require("pusher-js");
 
 function initialState (){
   return {
-        light_is_on: false,
-        bpm_value : 0,
-        heart_stop : true,
-        temperature_value : 0,
+        map: null,
+        marker: null,
+        center: {
+            lat: 31.043084529096628,
+            lng: 31.35235957295868
+        },
+        location: null,
+        lineCoordinates: [],
         socket_data: [],
         device_token: null,
         device_id: null,
@@ -144,27 +125,65 @@ function initialState (){
 
 export default {
     components: {
-    RockerSwitch,
-    Lightbulb,
-    Heart,
     TimeAgo
     },
     data() {
         return initialState();
     },
     watch: {
-        //
+        authorized :  function(value){
+            if(value == true)
+                this.mapinit();
+        }
     },
     computed: {
         socket_data: function() {
             return this.items.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-        }
+        },
     },
     methods: {
+        mapinit() {
+            this.map = new google.maps.Map(
+                document.getElementById("realtimemap"), {
+                    center: this.center,
+                    zoom: 8,
+                }
+            );
+
+            this.marker = new google.maps.Marker({
+                position: this.center,
+                map: this.map,
+                animation: "bounce",
+            });
+        },
+        updateMap() {
+            let position = {
+                lat: parseFloat(this.location.lat),
+                lng: parseFloat(this.location.lng)
+            }
+
+            this.map.setCenter(position)
+            this.marker.setPosition(position)
+            this.lineCoordinates.push({
+                lat: position.lat,
+                lng: position.lng
+            })
+
+            const lineCoordinatesPath = new google.maps.Polyline({
+                path: this.lineCoordinates,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+            });
+
+            lineCoordinatesPath.setMap(this.map)
+        },
         socketConnect: function () {
             this.authorize();
         },
         logout :  function(){
+            localECHO.leave(`App.Car.${this.device_id}`);
              axios({
                     method: "POST",
                     url: "/iot/v1/logout",
@@ -258,10 +277,14 @@ export default {
                                 };
                             },
                         });
-                        localECHO.private(`App.Device.${this.device_id}`)
+                        localECHO.private(`App.Car.${this.device_id}`).notification((notification) => {
+                            console.log(notification);
+                        });
+                        localECHO.private(`App.Car.${this.device_id}`)
                             .listen(
-                                ".send_data_event",
+                                ".send_location_event",
                                 (e) => {
+                                    console.log(e)
                                     this.socket_data.push(e);
                                     this.handelResposne(e)
                                 }
@@ -272,38 +295,20 @@ export default {
             });
         },
         handelResposne : function(e){
-            this.handelBulb(e)
-            this.handelTemprature(e)
-            this.handelHeartBeat(e)
+            this.handelLoction(e)
         },
-        handelBulb : function(data){
-            if(this.socketPayloadContainsKey(data.payload , "light_is_on")){
-                let light_before = this.light_is_on;
-                this.light_is_on = data.payload.light_is_on;
-                if(light_before != this.light_is_on)
-                    if(this.light_is_on)
-                        this.notify("Light is ON")
-                    else
-                        this.warning("Light is Off")
-            }
-        },
-        handelTemprature : function(data){
-            if(this.socketPayloadContainsKey(data.payload , "temperature_value")){
-                this.temperature_value = data.payload.temperature_value;
-            }
-        },
-        handelHeartBeat : function(data){
-            if(this.socketPayloadContainsKey(data.payload , "bpm_value")){
-                let bpm_before = this.bpm_value;
-                this.bpm_value = data.payload.bpm_value;
-                this.bpm_value == 0 ? this.heart_stop = true : this.heart_stop = false;
-                if(this.bpm_value != bpm_before && this.bpm_value == 0 )
-                    this.error("Heart is Stopped!!!!")
+        handelLoction : function(data){
+            if(this.socketPayloadContainsKey(data.payload , "lat") && this.socketPayloadContainsKey(data.payload , "lng")){
+                this.location = [data.payload.lat , data.payload.lng];
+                this.updateMap()
             }
         },
         socketPayloadContainsKey(payload,key) {
             return Object.keys(payload).includes(key);
         }
+    },
+    mounted() {
+        //
     },
     created() {
         //

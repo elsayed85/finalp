@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\IOT\Car;
+namespace App\Http\Controllers\Iot\V1;
 
+use App\Events\Iot\V1\Car\SendCurrentLocation;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\IOT\Car\UpdateCurrentLocation;
+use App\Http\Requests\Iot\V1\Car\UpdateCurrentLocation;
 use App\Models\Drive\Car;
 use Illuminate\Http\Request;
 
@@ -11,16 +12,21 @@ class LocationController extends Controller
 {
     public function updateCurrentLocation(UpdateCurrentLocation $request)
     {
-        $car = Car::whereToken($request->token)->first();
+        $car = $request->user();
 
-        $car->update([
+        $payload = [
             'lat' => $request->lat,
             'lng' => $request->lng
-        ]);
+        ];
+
+        $car->update($payload);
+
+        event((new SendCurrentLocation($car->id, $payload)));
 
         return response()->json([
-            'car' => $car,
+            'car' => $car->id,
             'success' => true,
+            'payload' => $payload
         ]);
     }
 }

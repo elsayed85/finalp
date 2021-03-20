@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Drive\Car;
+
 return [
 
     /*
@@ -56,6 +58,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'car' => [
+            'driver' => 'session',
+            'provider' => 'cars',
+        ],
     ],
 
     /*
@@ -89,6 +96,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'cars' => [
+            'driver' => 'eloquent',
+            'model' => Car::class,
         ],
 
         // 'users' => [

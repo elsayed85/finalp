@@ -3,14 +3,18 @@
 namespace App\Models\Drive;
 
 use App\Hospital;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Malhal\Geographical\Geographical;
 use Spatie\ModelStatus\HasStatuses;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Car extends Model
+class Car extends Authenticatable
 {
-    use HasStatuses, Geographical;
+    use HasStatuses, Geographical, HasApiTokens;
+    use Uuid , Notifiable;
 
     const LATITUDE  = 'lat';
     const LONGITUDE = 'lng';
@@ -22,6 +26,19 @@ class Car extends Model
         'lng' => 'double'
     ];
 
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
     /**
      * The attributes that aren't mass assignable.
@@ -30,6 +47,23 @@ class Car extends Model
      */
     protected $guarded = [];
 
+
+    protected $hidden = [
+        'private_key',
+    ];
+
+    /**
+     * @return mixed|string
+     */
+    public function getAuthPassword()
+    {
+        return $this->private_key;
+    }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'private-Car.' . $this->id;
+    }
 
     public function drives()
     {
@@ -55,17 +89,6 @@ class Car extends Model
     public function setAsUnAvailable()
     {
         $this->update(['is_available' => false]);
-        return $this;
-    }
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken($token)
-    {
-        $this->token = $token;
         return $this;
     }
 }

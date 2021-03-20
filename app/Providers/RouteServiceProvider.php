@@ -20,6 +20,8 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $apiNamespace = 'App\Http\Controllers\Api';
 
+    protected $iotNamespace = 'App\Http\Controllers\Iot';
+
 
     /**
      * The path to the "home" route for your application.
@@ -54,6 +56,10 @@ class RouteServiceProvider extends ServiceProvider
         DB::enableQueryLog();
 
         $this->mapApiRoutes();
+
+        $this->mapLaravelApiRoutes();
+
+        $this->mapIotRoutes();
 
         $this->mapGuestRoutes();
 
@@ -140,11 +146,34 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'middleware' => ['enforceJson', 'api', 'api_version:v1', 'api_localization'],
+            'middleware' => ['api'],
             'namespace'  => "{$this->apiNamespace}\V1",
             'prefix'     => 'api/v1',
         ], function ($router) {
             require base_path('routes/Api/v1.php');
+        });
+    }
+
+    protected function mapLaravelApiRoutes()
+    {
+        Route::group([
+            'middleware' => ['api'],
+            'namespace'  => "{$this->apiNamespace}",
+            'prefix'     => 'api',
+        ], function ($router) {
+            require base_path('routes/api.php');
+        });
+    }
+
+    protected function mapIotRoutes()
+    {
+        Route::group([
+            'middleware' => ['enforceJson', 'api', 'iot_version:v1'],
+            'namespace'  => "{$this->iotNamespace}\V1",
+            'prefix'     => 'iot/v1',
+            'as' => 'iot.'
+        ], function ($router) {
+            require base_path('routes/Iot/v1.php');
         });
     }
 }

@@ -14,11 +14,12 @@ class CreateCarsTable extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->boolean('is_available')->default(false);
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->string('token')->nullable();
+            $table->string('public_key')->unique();
+            $table->string('private_key')->unique();
             $table->timestamps();
         });
     }

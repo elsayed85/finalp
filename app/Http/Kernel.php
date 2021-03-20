@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\APIVersion;
 use App\Http\Middleware\EnforceJson;
+use App\Http\Middleware\IOTVersion;
 use App\Http\Middleware\localization;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -78,6 +79,7 @@ class Kernel extends HttpKernel
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
 
         'api_version' => APIVersion::class,
+        'iot_version' => IOTVersion::class,
         'api_localization' => localization::class,
         'enforceJson' => EnforceJson::class,
 

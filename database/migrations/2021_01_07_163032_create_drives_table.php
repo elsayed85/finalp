@@ -17,7 +17,7 @@ class CreateDrivesTable extends Migration
             $table->id();
             $table->double('s_lat');
             $table->double('s_lng');
-            $table->unsignedBigInteger('car_id')->nullable();
+            $table->foreignUuid('car_id')->nullable();
             $table->foreign('car_id')->on('cars')->references('id')->nullOnDelete();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->on('users')->references('id')->nullOnDelete();

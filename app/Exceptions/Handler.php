@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Traits\ExceptionHandlerTrait;
 use Error;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -13,6 +14,7 @@ use TypeError;
 
 class Handler extends ExceptionHandler
 {
+    use ExceptionHandlerTrait;
     /**
      * A list of the exception types that are not reported.
      *
@@ -56,15 +58,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        if ($request->is("api/*")) {
+        if (request()->is("api/*")) {
             $request->headers->set('Accept', 'application/json', true);
-            if($e instanceof AuthorizationException ){
-                return response()->json([
-                    'message' => $e->getMessage(),
-                    'success' => false,
-                    'code' => 401
-                ] ,  401);
-            }
+            $this->handelException($e);
         }
         return parent::render($request, $e);
     }

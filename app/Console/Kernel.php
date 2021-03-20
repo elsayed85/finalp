@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command("queue:restart")->everyMinute();
+        $schedule->command('websockets:clean')->daily();
         $schedule->command("queue:work --tries=3")->everyMinute()->withoutOverlapping();
         $schedule->command("queue:work --tries=3")->everyMinute()->withoutOverlapping();
         $schedule->command("queue:work --tries=3")->everyMinute()->withoutOverlapping();

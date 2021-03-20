@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class APIVersion
+class IOTVersion
 {
     /**
      * Handle an incoming request.
@@ -13,9 +13,9 @@ class APIVersion
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next , $verision)
+    public function handle($request, Closure $next , $version)
     {
-        config(['app.api.api_latest' => $verision]);
+        config(['iot.api.api_latest' => $version]);
         return $next($request);
     }
 }
