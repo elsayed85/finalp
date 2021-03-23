@@ -1845,12 +1845,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue2_timeago__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-timeago */ "./node_modules/vue2-timeago/dist/vue2-timeago.esm.js");
-/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-tree-view */ "./node_modules/vue-json-tree-view/dist/vue-json-tree-view.min.js");
-/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue2_timeago__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-timeago */ "./node_modules/vue2-timeago/dist/vue2-timeago.esm.js");
+/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-json-tree-view */ "./node_modules/vue-json-tree-view/dist/vue-json-tree-view.min.js");
+/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 //
 //
@@ -1935,7 +1935,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_toastification__WEBPACK_IMPORTED_MODULE_2__.default, {
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_toastification__WEBPACK_IMPORTED_MODULE_3__.default, {
   transition: "Vue-Toastification__bounce",
   maxToasts: 30,
   newestOnTop: true,
@@ -1952,7 +1952,7 @@ vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_toastification__WEBPACK_IMPORTE
   position: "bottom-right",
   timeout: 3048
 });
-vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1___default()));
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2___default()));
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 
@@ -1978,7 +1978,7 @@ function initialState() {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TimeAgo: vue2_timeago__WEBPACK_IMPORTED_MODULE_0__.default
+    TimeAgo: vue2_timeago__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return initialState();
@@ -2213,8 +2213,11 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__.default({
   cluster: "mt1",
   forceTLS: false,
   wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true
+  wsPort: window.APP_DEBUG ? 6001 : 6002,
+  wssPort: window.APP_DEBUG ? 6001 : 6002,
+  disableStats: true,
+  encrypted: !window.APP_DEBUG,
+  enabledTransports: ['ws', 'wss']
 });
 
 /***/ }),

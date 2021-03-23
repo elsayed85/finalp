@@ -19,7 +19,6 @@ trait ExceptionHandlerTrait
     public function handelException(Throwable $e)
     {
         $this->e = $e;
-        dd('hey');
         switch (true) {
             case $e instanceof AuthorizationException:
                 return $this->AuthorizationExceptionHandler();
