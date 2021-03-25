@@ -7,8 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfgxTzvLseuMlbdX6SBjnAgQWlFyfMHHU"
-    type="text/javascript"></script>
 </head>
 <body>
     <div id="app">

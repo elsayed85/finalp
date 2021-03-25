@@ -1845,12 +1845,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue2_timeago__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-timeago */ "./node_modules/vue2-timeago/dist/vue2-timeago.esm.js");
-/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-json-tree-view */ "./node_modules/vue-json-tree-view/dist/vue-json-tree-view.min.js");
-/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue2_timeago__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-timeago */ "./node_modules/vue2-timeago/dist/vue2-timeago.esm.js");
+/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-tree-view */ "./node_modules/vue-json-tree-view/dist/vue-json-tree-view.min.js");
+/* harmony import */ var vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 //
 //
@@ -1924,18 +1924,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_toastification__WEBPACK_IMPORTED_MODULE_3__.default, {
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_toastification__WEBPACK_IMPORTED_MODULE_2__.default, {
   transition: "Vue-Toastification__bounce",
   maxToasts: 30,
   newestOnTop: true,
@@ -1952,18 +1946,12 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_toastification__WEBPACK_IMPORTE
   position: "bottom-right",
   timeout: 3048
 });
-vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vue_json_tree_view__WEBPACK_IMPORTED_MODULE_2___default()));
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_json_tree_view__WEBPACK_IMPORTED_MODULE_1___default()));
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 
 function initialState() {
   return {
-    map: null,
-    marker: null,
-    center: {
-      lat: 31.043084529096628,
-      lng: 31.35235957295868
-    },
     location: null,
     lineCoordinates: [],
     socket_data: [],
@@ -1978,15 +1966,10 @@ function initialState() {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TimeAgo: vue2_timeago__WEBPACK_IMPORTED_MODULE_1__.default
+    TimeAgo: vue2_timeago__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return initialState();
-  },
-  watch: {
-    authorized: function authorized(value) {
-      if (value == true) this.mapinit();
-    }
   },
   computed: {
     socket_data: function socket_data() {
@@ -1996,37 +1979,6 @@ function initialState() {
     }
   },
   methods: {
-    mapinit: function mapinit() {
-      this.map = new google.maps.Map(document.getElementById("realtimemap"), {
-        center: this.center,
-        zoom: 8
-      });
-      this.marker = new google.maps.Marker({
-        position: this.center,
-        map: this.map,
-        animation: "bounce"
-      });
-    },
-    updateMap: function updateMap() {
-      var position = {
-        lat: parseFloat(this.location.lat),
-        lng: parseFloat(this.location.lng)
-      };
-      this.map.setCenter(position);
-      this.marker.setPosition(position);
-      this.lineCoordinates.push({
-        lat: position.lat,
-        lng: position.lng
-      });
-      var lineCoordinatesPath = new google.maps.Polyline({
-        path: this.lineCoordinates,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-      lineCoordinatesPath.setMap(this.map);
-    },
     socketConnect: function socketConnect() {
       this.authorize();
     },
@@ -2148,8 +2100,7 @@ function initialState() {
     },
     handelLoction: function handelLoction(data) {
       if (this.socketPayloadContainsKey(data.payload, "lat") && this.socketPayloadContainsKey(data.payload, "lng")) {
-        this.location = [data.payload.lat, data.payload.lng];
-        this.updateMap();
+        this.location = [data.payload.lat, data.payload.lng]; //this.updateMap()
       }
     },
     socketPayloadContainsKey: function socketPayloadContainsKey(payload, key) {
@@ -48102,14 +48053,10 @@ var render = function() {
     _vm._v(" "),
     _vm.authorized
       ? _c("div", [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-8" }, [
               _c("table", { staticClass: "leading-normal socket_table" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -48163,19 +48110,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          staticStyle: { width: "100%", height: "600px" },
-          attrs: { id: "realtimemap" }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
