@@ -32,7 +32,6 @@ class Parser
      *
      * @param string $line The line to parse
      *
-     * @return \Elsayed85\NMEA\Frame The frame type parser instance
      */
     public function readLine($line)
     {
@@ -71,13 +70,12 @@ class Parser
      * @param string $line The line to read
      * @param string $frameType The frame type
      *
-     * @return \App\Services\Location\NMEA\Frame
      *
      * @throws Exception If no parse exist for this frame type
      */
     protected function obtainFrameParser($line, $frameType)
     {
-        $frameClassName = '\App\Services\Location\NMEA\Frames\\' . $frameType;
+        $frameClassName = 'App\Services\Location\frames\\' . $frameType;
 
         if (!class_exists($frameClassName)) {
             throw new Exception(

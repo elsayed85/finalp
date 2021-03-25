@@ -4,6 +4,7 @@ use App\Events\sendPositionEvent;
 use App\Http\Controllers\Iot\V1\AuthController;
 use App\Http\Controllers\Iot\V1\DataController;
 use App\Http\Controllers\Iot\V1\LocationController;
+use App\Services\Location\Parser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::get('test', function (Request $request) {
 
 Route::get('test2', function (Request $request) {
     $location = $request->location;
-    $data = (object)(new BultonFr\NMEA\Parser())->readLine($location)->toArray();
+    $data = (object)(new Parser())->readLine($location)->toArray();
     return response()->json([
         'data' => [
             'utcTime' => $data->utcTime,
