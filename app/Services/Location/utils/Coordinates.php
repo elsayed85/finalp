@@ -5,7 +5,7 @@ namespace App\Services\Location\utils;
 /**
  * Tools to convert NMEA coordinates
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  */
 class Coordinates

@@ -4,16 +4,17 @@ namespace App\Services\Location\frames;
 
 use \DateTime;
 use \DateTimeZone;
+use App\Services\Location\Frame;
 
 /**
  * Define the parser system for GLL frame type
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  * @link http://www.gpsinformation.org/dale/nmea.htm#GLL
  * @link http://aprs.gids.nl/nmea/#gll
  */
-class GLL extends \Elsayed85\NMEA\Frame
+class GLL extends Frame
 {
     /**
      * {@inheritdoc}

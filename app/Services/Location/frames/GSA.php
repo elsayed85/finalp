@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Services\Location\frames;
+use App\Services\Location\Frame;
 
 /**
  * Define the parser system for GSA frame type
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  * @link http://www.gpsinformation.org/dale/nmea.htm#GSA
  * @link http://aprs.gids.nl/nmea/#gsa
  */
-class GSA extends \Elsayed85\NMEA\Frame
+class GSA extends Frame
 {
     /**
      * {@inheritdoc}

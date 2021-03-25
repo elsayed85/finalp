@@ -8,7 +8,7 @@ use \Exception;
  * Parse a nmea line to determine the frame type of the line and create an
  * instance of the frame type parser.
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  */
 class Parser
@@ -71,13 +71,13 @@ class Parser
      * @param string $line The line to read
      * @param string $frameType The frame type
      *
-     * @return \Elsayed85\NMEA\Frame
+     * @return \App\Services\Location\NMEA\Frame
      *
      * @throws Exception If no parse exist for this frame type
      */
     protected function obtainFrameParser($line, $frameType)
     {
-        $frameClassName = '\Elsayed85\NMEA\Frames\\' . $frameType;
+        $frameClassName = '\App\Services\Location\NMEA\Frames\\' . $frameType;
 
         if (!class_exists($frameClassName)) {
             throw new Exception(

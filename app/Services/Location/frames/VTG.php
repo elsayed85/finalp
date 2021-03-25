@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Services\Location\frames;
+use App\Services\Location\Frame;
 
 /**
  * Define the parser system for VTG frame type
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  * @link http://www.gpsinformation.org/dale/nmea.htm#VTG
  * @link http://aprs.gids.nl/nmea/#vtg
  */
-class VTG extends \Elsayed85\NMEA\Frame
+class VTG extends Frame
 {
     /**
      * {@inheritdoc}

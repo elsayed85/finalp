@@ -2,15 +2,17 @@
 
 namespace App\Services\Location\frames;
 
+use App\Services\Location\Frame;
+
 /**
  * Define the parser system for GSV frame type
  *
- * @package Elsayed85\NMEA
+
  * @author Vermeulen Maxime <bulton.fr@gmail.com>
  * @link http://www.gpsinformation.org/dale/nmea.htm#GSV
  * @link http://aprs.gids.nl/nmea/#gsv
  */
-class GSV extends \Elsayed85\NMEA\Frame
+class GSV extends Frame
 {
     /**
      * {@inheritdoc}
