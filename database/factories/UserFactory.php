@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Drive\HospitalDrive;
 use App\Models\Drive\Car;
 use App\Models\Drive\Drive;
+use App\Services\Drive\HospitalDrive;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1\User;
 
-use App\Drive\HospitalDrive;
 use App\Hospital;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\User\Drive\changeDestinationRequest;
 use App\Http\Requests\Api\V1\User\Drive\MakeDriveRequest;
 use App\Models\Drive\Car;
 use App\Models\Drive\Drive;
+use App\Services\Drive\HospitalDrive;
 use Illuminate\Http\Request;
 
 class DriveController extends Controller

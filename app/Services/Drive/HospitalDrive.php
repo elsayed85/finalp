@@ -1,5 +1,5 @@
 <?php
-namespace App\Drive;
+namespace App\Services\Drive;
 
 use App\Models\Drive\Car;
 use App\Models\Drive\Drive;
