@@ -37,7 +37,7 @@ class UpdateCurrentLocation extends FormRequest
     {
         $location = $this->location;
         $data = (object)(new Parser())->readLine($location);
-        dd($data);
+        //dd($data);
         $this->merge([
             'lat' => (float) $data->latitude,
             'lng' => (float) $data->longitude,
