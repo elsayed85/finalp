@@ -1,60 +1,108 @@
-<!doctype html>
-<html lang="en" class="no-focus">
+<!DOCTYPE html>
+<html>
 
 <head>
+    <!-- meta tag -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>404</title>
+    <meta name="description" content="">
+    <!-- responsive tag -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap v4 css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/bootstrap.min.css') }}">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/font-awesome.min.css') }}">
 
-    <title> {{ __('Not Found') }} </title>
+    <!-- animate css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/animate.css') }}">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="{{ asset("/assets/media/favicons/favicon.png") }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset("/assets/media/favicons/favicon-192x192.png") }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("/assets/media/favicons/apple-touch-icon-180x180.png") }}">
-    <!-- END Icons -->
+    <!-- hover css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/hover-min.css') }}">
 
-    <!-- Stylesheets -->
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/owl.carousel.css') }}">
 
-    <!-- Fonts and Codebase framework -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
-    <link rel="stylesheet" id="css-main" href="{{ asset("/assets/css/codebase.min.css") }}">
+    <!-- off canvas css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/off-canvas.css') }}">
+
+    <!-- flaticon css  -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/fonts/flaticon.css') }}">
+
+    <!-- rsmenu CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/rsmenu-main.css') }}">
+
+    <!-- magnific popup css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/magnific-popup.css') }}">
+
+    <!-- rsmenu transitions CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/rsmenu-transitions.css') }}">
+
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/style.css') }}">
+
+    <!-- Spacing css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/spacing.css') }}">
+
+    <!-- responsive css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/site/css/responsive.css') }}">
 
 </head>
 
 <body>
-    <div id="page-container" class="main-content-boxed">
 
-        <!-- Main Container -->
-        <main id="main-container">
+    {{-- <!-- Preloader area start here -->
+    <div id="loading" class="icon-preloader">
+        <div class="loader">
+            <div class="animate3">
+                <img src="{{ asset('/site/images/logo.svg') }}" alt="Preloader Image animate3">
+            </div>
+        </div>
+    </div>
+    <!--End preloader here --> --}}
 
-            <!-- Page Content -->
-            <div class="hero bg-white">
-                <div class="hero-inner">
-                    <div class="content content-full">
-                        <div class="py-30 text-center">
-                            <div class="display-3 text-danger">
-                                <i class="fa fa-warning"></i> 404
-                            </div>
-                            <h1 class="h2 font-w700 mt-30 mb-10">Oops.. You just found an error page..</h1>
-                            <h2 class="h3 font-w400 text-muted mb-50">We are sorry but the page you are looking for was not found..</h2>
-                            <a class="btn btn-hero btn-rounded btn-alt-secondary" href="{{ route('home') }}">
-                                <i class="fa fa-arrow-left mr-10"></i> Back to all Errors
-                            </a>
-                        </div>
-                    </div>
+    <div class="error">
+        <div class="container">
+            <div class="content-wrap text-center">
+                <div class="title-part">
+                    <h1 class="title white-color mb-15">404</h1>
+                    <div class="sub-title white-color">Page Not Found</div>
+                </div>
+                <div class="button-part">
+                    <a class="back-btn" href="{{ route('home') }}">Back to Homepage</a>
                 </div>
             </div>
-            <!-- END Page Content -->
-
-        </main>
-        <!-- END Main Container -->
+        </div>
     </div>
-    <!-- END Page Container -->
 
-    <script src="{{ asset("/assets/js/codebase.core.min.js") }}"></script>
+    <!-- modernizr js -->
+    <script src="{{ asset("/site/js/modernizr-2.8.3.min.js") }}"></script>
+    <!-- jquery latest version -->
+    <script src="{{ asset('/site/js/jquery.min.js') }}"></script>
+    <!-- counter top js -->
+    <script src="{{ asset('/site/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('/site/js/waypoints.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ asset('/site/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset("/assets/js/codebase.app.min.js") }}"></script>
+    <!-- owl.carousel js -->
+    <script src="{{ asset('/site/js/owl.carousel.min.js') }}"></script>
+
+    <!-- magnific popup -->
+    <script src="{{ asset('/site/js/jquery.magnific-popup.min.js') }}"></script>
+
+    <!-- wow js -->
+    <script src="{{ asset('/site/js/wow.min.js') }}"></script>
+
+    <!-- rsmenu js -->
+    <script src="{{ asset('/site/js/rsmenu-main.js') }}"></script>
+
+    <!-- plugins js -->
+    <script src="{{ asset('/site/js/plugins.js') }}"></script>
+
+    <!-- main js -->
+    <script src="{{ asset('/site/js/main.js') }}"></script>
 </body>
 
 </html>

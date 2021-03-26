@@ -8,9 +8,13 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-        // homepage
-        Route::view('/', 'welcome')->name("home");
-        Route::view('test', 'test')->name("test");
+        Route::namespace("Site")->group(function () {
+            Route::get("/", "SiteController@index")->name('home');
+            Route::get("about", "SiteController@about")->name('about');
+            Route::get("contact", "SiteController@contact")->name('contact');
+            Route::get("features", "SiteController@features")->name('features');
+            Route::post("contact", "ContactController")->name('contact.send');
+        });
 
         // patient
         Auth::routes(['verify' => true]);
