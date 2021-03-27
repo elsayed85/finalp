@@ -8,6 +8,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
+        Route::view("test", "test")->name('test');
         Route::namespace("Site")->group(function () {
             Route::get("/", "SiteController@index")->name('home');
             Route::get("about", "SiteController@about")->name('about');
