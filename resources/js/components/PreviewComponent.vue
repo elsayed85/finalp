@@ -28,6 +28,7 @@
         </div>
     </div>
     <hr/>
+    <div id="realtimemap" style="width:100%; height:600px"></div>
      <div v-if="authorized">
         <div class="row">
             <div class="col-md-8">
@@ -99,6 +100,12 @@ window.Pusher = require("pusher-js");
 
 function initialState (){
   return {
+        map: null,
+        marker: null,
+        center: {
+            lat: 31.043084529096628,
+            lng: 31.35235957295868
+        },
         location: null,
         lineCoordinates: [],
         socket_data: [],
@@ -124,6 +131,43 @@ export default {
         },
     },
     methods: {
+        mapinit() {
+            this.map = new google.maps.Map(
+                document.getElementById("realtimemap"), {
+                    center: this.center,
+                    zoom: 8,
+                }
+            );
+
+            this.marker = new google.maps.Marker({
+                position: this.center,
+                map: this.map,
+                animation: "bounce",
+            });
+        },
+        updateMap() {
+            let position = {
+                lat: parseFloat(this.location[0]),
+                lng: parseFloat(this.location[1])
+            }
+
+            this.map.setCenter(position)
+            this.marker.setPosition(position)
+            this.lineCoordinates.push({
+                lat: position.lat,
+                lng: position.lng
+            })
+
+            const lineCoordinatesPath = new google.maps.Polyline({
+                path: this.lineCoordinates,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+            });
+
+            lineCoordinatesPath.setMap(this.map)
+        },
         socketConnect: function () {
             this.authorize();
         },
@@ -150,13 +194,19 @@ export default {
             this.socket_data = [];
         },
         msg: function (type = 'success', message) {
-            Swal.fire({
-                position: 'top-end',
-                icon: type,
-                showConfirmButton: false,
-                timer: 1500,
-                text: message
-            })
+            switch (type) {
+                case "success":
+                    this.notify(message)
+                    break;
+                case "error":
+                    this.error(message)
+                    break;
+                case "warning":
+                    this.warning(message)
+                    break;
+                default:
+                    break;
+            }
         },
         notify : function(msg){
             this.$toast.success(msg, {
@@ -210,6 +260,7 @@ export default {
                                                 console.log(response);
                                                 this.msg("success", "Connected")
                                                 this.authorized = true;
+                                                this.mapinit();
                                                 callback(false, response.data);
                                             })
                                             .catch((error) => {
@@ -245,7 +296,7 @@ export default {
         handelLoction : function(data){
             if(this.socketPayloadContainsKey(data.payload , "lat") && this.socketPayloadContainsKey(data.payload , "lng")){
                 this.location = [data.payload.lat , data.payload.lng];
-                //this.updateMap()
+                this.updateMap()
             }
         },
         socketPayloadContainsKey(payload,key) {

@@ -27,19 +27,22 @@ class UpdateCurrentLocation extends FormRequest
      */
     public function rules()
     {
-        return [
-            "lat" => ['required', new LatitudeRule()],
-            'lng' => ['required', new LongitudeRule()]
-        ];
+        // return [
+        //     "lat" => ['required', new LatitudeRule()],
+        //     'lng' => ['required', new LongitudeRule()]
+        // ];
+        return [];
     }
 
     protected function prepareForValidation(): void
     {
-        $location = $this->location;
-        $data = (object)(new Parser())->readLine($location)->toArray();
-        $this->merge([
-            'lat' => (float) $data->latitude,
-            'lng' => (float) $data->longitude,
-        ]);
+
+        if ($location = $this->location) {
+            $data = (object)(new Parser())->readLine($location)->toArray();
+            $this->merge([
+                'lat' => (float) $data->latitude,
+                'lng' => (float) $data->longitude,
+            ]);
+        }
     }
 }

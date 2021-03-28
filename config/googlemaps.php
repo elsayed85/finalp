@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'key'       => 'AIzaSyCfgxTzvLseuMlbdX6SBjnAgQWlFyfMHHU',
+    'key'       => env('GOOGLE_MAP_KEY' , null),
 
     /*
     |--------------------------------------------------------------------------

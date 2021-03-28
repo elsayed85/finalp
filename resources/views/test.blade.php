@@ -16,6 +16,9 @@
         window.PUSHER_APP_KEY = '{{ config('broadcasting.connections.pusher.key') }}';
         window.APP_DEBUG = {{ config('app.debug') ? 'true' : 'false' }};
     </script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key={{ config('googlemaps.key') }}"
+    async></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
 </body>
