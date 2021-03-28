@@ -5,6 +5,7 @@ namespace App;
 use \OwenIt\Auditing\Auditable as AuditableTrait;
 use App\Models\Appointment;
 use App\Models\Drive\Drive;
+use App\Models\Patient\HeartBeat;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 // [USER] Model is [Patient]
 
-class User extends Authenticatable implements HasMedia, Auditable , MustVerifyEmail
+class User extends Authenticatable implements HasMedia, Auditable, MustVerifyEmail
 {
     use Notifiable, HasApiTokens, HasMediaTrait, Billable, AuditableTrait, Geographical;
 
@@ -92,5 +93,15 @@ class User extends Authenticatable implements HasMedia, Auditable , MustVerifyEm
     public function drives()
     {
         return $this->hasMany(Drive::class);
+    }
+
+    public function heartbeats()
+    {
+        return $this->hasMany(HeartBeat::class, "patient_id");
+    }
+
+    public function setHeartBeat($value)
+    {
+        return $this->heartbeats()->create(['value' => $value]);
     }
 }

@@ -2,21 +2,22 @@
 
 use App\Events\sendPositionEvent;
 use App\Http\Controllers\Iot\V1\AuthController;
-use App\Http\Controllers\Iot\V1\DataController;
+use App\Http\Controllers\Iot\V1\CarController;
+use App\Http\Controllers\Iot\V1\HeartBeatController;
 use App\Http\Controllers\Iot\V1\LocationController;
 use App\Services\Location\Parser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
-Route::post('login', [AuthController::class, "login"])->name('login');
+Route::post('login', [AuthController::class, "login"])->name('car.login');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('send', [DataController::class, "send"])->name('data.send');
-    Route::post('update-current-location', [LocationController::class, "updateCurrentLocation"])->name('car.update_current_location');
+Route::group(['middleware' => ['auth:sanctum'], 'as' => 'car.'], function () {
+    Route::post('update-current-location', [LocationController::class, "updateCurrentLocation"])->name('update_current_location');
+    Route::post('set-current-patient', [CarController::class, "setCurrentPatient"])->name('set_current_patient');
+    Route::post('update-heartbeat', [HeartBeatController::class, "updateByCar"])->name('heartbeat.update');
     Route::post('logout', [AuthController::class, "logout"])->name('logout');
 });
-
 
 
 Route::get('test', function (Request $request) {
@@ -48,8 +49,3 @@ Route::get('test2', function (Request $request) {
         ]
     ]);
 });
-
-Route::group(['prefix' => 'car', 'namespace' => 'Car', 'as' => 'car.'], function () {
-    Route::get('update-location', [LocationController::class, "updateCurrentLocation"])->name('update_location');
-});
-

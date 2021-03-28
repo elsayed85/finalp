@@ -3,6 +3,8 @@
 namespace App\Models\Drive;
 
 use App\Hospital;
+use App\Models\Patient\HeartBeat;
+use App\User;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 class Car extends Authenticatable
 {
     use HasStatuses, Geographical, HasApiTokens;
-    use Uuid , Notifiable;
+    use Uuid, Notifiable;
 
     const LATITUDE  = 'lat';
     const LONGITUDE = 'lng';
@@ -75,6 +77,16 @@ class Car extends Authenticatable
         return $this->drives()->latest()->first();
     }
 
+    public function CurrentPatient()
+    {
+        return $this->belongsTo(User::class, 'current_patient_id');
+    }
+
+    public function heartbeats()
+    {
+        return $this->CurrentPatient->heartBeats();
+    }
+
     public function scopeAvailable($query)
     {
         return $query->where('is_available', 1);
@@ -90,5 +102,21 @@ class Car extends Authenticatable
     {
         $this->update(['is_available' => false]);
         return $this;
+    }
+
+    public function setCurrentPatient($patient_id)
+    {
+        $this->update(['current_patient_id' => $patient_id]);
+        return $this;
+    }
+
+    public function hasPatient()
+    {
+        return !is_null($this->current_patient_id);
+    }
+
+    public function setHeartBeat($value)
+    {
+        return HeartBeat::create(['value' => $value, 'patient_id' => $this->current_patient_id]);
     }
 }

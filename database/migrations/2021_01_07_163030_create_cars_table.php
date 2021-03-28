@@ -20,6 +20,8 @@ class CreateCarsTable extends Migration
             $table->double('lng')->nullable();
             $table->string('public_key')->unique();
             $table->string('private_key')->unique();
+            $table->unsignedBigInteger('current_patient_id')->nullable();
+            $table->foreign('current_patient_id')->on('users')->references('id')->nullOnDelete();
             $table->timestamps();
         });
     }
