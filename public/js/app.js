@@ -48111,7 +48111,7 @@ var render = function() {
     _vm.authorized
       ? _c("div", [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "col-md-12" }, [
               _c("table", { staticClass: "leading-normal socket_table" }, [
                 _vm._m(0),
                 _vm._v(" "),

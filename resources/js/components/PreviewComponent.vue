@@ -31,7 +31,7 @@
     <div id="realtimemap" style="width:100%; height:600px"></div>
      <div v-if="authorized">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <table class="leading-normal socket_table">
                         <thead>
                             <tr>
