@@ -25,6 +25,7 @@ Route::get('test', function (Request $request) {
     return response()->json([
         'data' => $request->all()
     ]);
+    
 });
 
 Route::get('test2', function (Request $request) {
