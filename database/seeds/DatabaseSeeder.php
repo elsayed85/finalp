@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Admin::create([
-            'email' => "elsayedkamal581999@gmail.com",
+            'email' => "test@gmail.com",
             'password' =>  Hash::make("password"),
             'name' => "Admin sayed",
         ]);
 
         $hospital = Hospital::create([
-            'email' => "elsayedkamal581999@gmail.com",
+            'email' => "test@gmail.com",
             'password' =>  Hash::make("password"),
             'name' => "Admin sayed",
         ]);
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $hospital->location()->create(['lat' => '31.043084529096628', 'lng' => '31.35235957295868']);
 
         $user = User::create([
-            'email' => "elsayedkamal581999@gmail.com",
+            'email' => "test@gmail.com",
             'password' =>  Hash::make("password"),
             'name' => "User sayed",
             'email_verified_at' => now(),

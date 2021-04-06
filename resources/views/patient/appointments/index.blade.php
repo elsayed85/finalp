@@ -8,13 +8,14 @@
 
 @section('content')
 <div class="content">
-    <livewire:patient.appointments-calendar
-        week-starts-at="6"
+    <livewire:patient.appointments-calendar week-starts-at="6"
         before-calendar-view="patient.appointments.includes.before_calendar"
         after-calendar-view="patient.appointments.includes.after_calendar" />
 
     <div class="modal fade" id="show_event_modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document" id="event_content">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" id="event_content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+                    class="icofont-close-line"></i></button>
             <!-- content here -->
         </div>
     </div>
