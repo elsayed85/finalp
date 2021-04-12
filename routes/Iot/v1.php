@@ -20,12 +20,13 @@ Route::group(['middleware' => ['auth:sanctum'], 'as' => 'car.'], function () {
 });
 
 
+
 Route::get('test', function (Request $request) {
     Log::alert($request->all());
     return response()->json([
         'data' => $request->all()
     ]);
-    
+
 });
 
 Route::get('test2', function (Request $request) {
